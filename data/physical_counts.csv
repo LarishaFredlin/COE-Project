@@ -1,0 +1,25 @@
+part_id,part_name,location,physical_stock,ground_truth_cause,last_audit_timestamp
+SP-001,Turbine Flow Sensor,Chennai Repair Hub,6,NONE,2026-08-11 14:58:00
+SP-001,Turbine Flow Sensor,Bangalore Repair Hub,7,MISSING_TRANSFER,2026-08-11 14:58:00
+SP-001,Turbine Flow Sensor,Mumbai Repair Hub,21,NONE,2026-08-11 14:58:00
+SP-002,High-Voltage Inverter Module,Chennai Repair Hub,2,NONE,2026-08-11 14:58:00
+SP-002,High-Voltage Inverter Module,Bangalore Repair Hub,15,NONE,2026-08-11 14:58:00
+SP-002,High-Voltage Inverter Module,Mumbai Repair Hub,13,DUPLICATE_TRANSACTION,2026-08-11 14:58:00
+SP-003,Hydraulic Servo Valve,Chennai Repair Hub,0,NETWORK_SYNC_FAILURE,2026-08-11 14:58:00
+SP-003,Hydraulic Servo Valve,Bangalore Repair Hub,3,NONE,2026-08-11 14:58:00
+SP-003,Hydraulic Servo Valve,Mumbai Repair Hub,23,NONE,2026-08-11 14:58:00
+SP-004,Fiber Optic Gyroscope,Chennai Repair Hub,3,NONE,2026-08-11 14:58:00
+SP-004,Fiber Optic Gyroscope,Bangalore Repair Hub,5,TIMESTAMP_ANOMALY,2026-08-11 14:58:00
+SP-004,Fiber Optic Gyroscope,Mumbai Repair Hub,4,NONE,2026-08-11 14:58:00
+SP-005,CNC Controller Board,Chennai Repair Hub,2,NONE,2026-08-11 14:58:00
+SP-005,CNC Controller Board,Bangalore Repair Hub,19,NONE,2026-08-11 14:58:00
+SP-005,CNC Controller Board,Mumbai Repair Hub,18,NONE,2026-08-11 14:58:00
+SP-006,Diode Laser Pump,Chennai Repair Hub,3,NONE,2026-08-11 14:58:00
+SP-006,Diode Laser Pump,Bangalore Repair Hub,20,NONE,2026-08-11 14:58:00
+SP-006,Diode Laser Pump,Mumbai Repair Hub,16,NONE,2026-08-11 14:58:00
+SP-007,Cryogenic Pump,Chennai Repair Hub,15,NONE,2026-08-11 14:58:00
+SP-007,Cryogenic Pump,Bangalore Repair Hub,5,NONE,2026-08-11 14:58:00
+SP-007,Cryogenic Pump,Mumbai Repair Hub,7,NONE,2026-08-11 14:58:00
+SP-008,Optical Transceiver Array,Chennai Repair Hub,12,NONE,2026-08-11 14:58:00
+SP-008,Optical Transceiver Array,Bangalore Repair Hub,2,NONE,2026-08-11 14:58:00
+SP-008,Optical Transceiver Array,Mumbai Repair Hub,18,NONE,2026-08-11 14:58:00

@@ -1,0 +1,342 @@
+transaction_id,part_id,part_name,event_type,quantity,location,timestamp,transfer_id,sync_status
+TX-1001,SP-001,Turbine Flow Sensor,RECEIPT,11,Chennai Repair Hub,2026-08-01 08:30:00,,SYNCED
+TX-1002,SP-001,Turbine Flow Sensor,RECEIPT,14,Bangalore Repair Hub,2026-08-01 08:40:00,,SYNCED
+TX-1003,SP-001,Turbine Flow Sensor,RECEIPT,13,Mumbai Repair Hub,2026-08-01 08:57:00,,SYNCED
+TX-1004,SP-002,High-Voltage Inverter Module,RECEIPT,11,Chennai Repair Hub,2026-08-01 09:11:00,,SYNCED
+TX-1005,SP-002,High-Voltage Inverter Module,RECEIPT,11,Bangalore Repair Hub,2026-08-01 09:38:00,,SYNCED
+TX-1006,SP-002,High-Voltage Inverter Module,RECEIPT,16,Mumbai Repair Hub,2026-08-01 10:06:00,,SYNCED
+TX-1007,SP-003,Hydraulic Servo Valve,RECEIPT,10,Chennai Repair Hub,2026-08-01 10:17:00,,SYNCED
+TX-1008,SP-003,Hydraulic Servo Valve,RECEIPT,13,Bangalore Repair Hub,2026-08-01 10:29:00,,SYNCED
+TX-1009,SP-003,Hydraulic Servo Valve,RECEIPT,18,Mumbai Repair Hub,2026-08-01 10:46:00,,SYNCED
+TX-1010,SP-004,Fiber Optic Gyroscope,RECEIPT,10,Chennai Repair Hub,2026-08-01 11:15:00,,SYNCED
+TX-1011,SP-004,Fiber Optic Gyroscope,RECEIPT,13,Bangalore Repair Hub,2026-08-01 11:42:00,,SYNCED
+TX-1012,SP-004,Fiber Optic Gyroscope,RECEIPT,18,Mumbai Repair Hub,2026-08-01 12:12:00,,SYNCED
+TX-1013,SP-005,CNC Controller Board,RECEIPT,13,Chennai Repair Hub,2026-08-01 12:35:00,,SYNCED
+TX-1014,SP-005,CNC Controller Board,RECEIPT,19,Bangalore Repair Hub,2026-08-01 12:59:00,,SYNCED
+TX-1015,SP-005,CNC Controller Board,RECEIPT,10,Mumbai Repair Hub,2026-08-01 13:17:00,,SYNCED
+TX-1016,SP-006,Diode Laser Pump,RECEIPT,16,Chennai Repair Hub,2026-08-01 13:32:00,,SYNCED
+TX-1017,SP-006,Diode Laser Pump,RECEIPT,14,Bangalore Repair Hub,2026-08-01 13:52:00,,SYNCED
+TX-1018,SP-006,Diode Laser Pump,RECEIPT,13,Mumbai Repair Hub,2026-08-01 14:06:00,,SYNCED
+TX-1019,SP-007,Cryogenic Pump,RECEIPT,11,Chennai Repair Hub,2026-08-01 14:26:00,,SYNCED
+TX-1020,SP-007,Cryogenic Pump,RECEIPT,16,Bangalore Repair Hub,2026-08-01 14:38:00,,SYNCED
+TX-1021,SP-007,Cryogenic Pump,RECEIPT,15,Mumbai Repair Hub,2026-08-01 14:51:00,,SYNCED
+TX-1022,SP-008,Optical Transceiver Array,RECEIPT,19,Chennai Repair Hub,2026-08-01 15:12:00,,SYNCED
+TX-1023,SP-008,Optical Transceiver Array,RECEIPT,10,Bangalore Repair Hub,2026-08-01 15:30:00,,SYNCED
+TX-1024,SP-008,Optical Transceiver Array,RECEIPT,18,Mumbai Repair Hub,2026-08-01 15:54:00,,SYNCED
+TX-1025,SP-007,Cryogenic Pump,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-01 16:24:00,TRF-1025,SYNCED
+TX-1027,SP-004,Fiber Optic Gyroscope,RECEIPT,2,Bangalore Repair Hub,2026-08-01 16:44:00,,SYNCED
+TX-1028,SP-007,Cryogenic Pump,PICK,2,Bangalore Repair Hub,2026-08-01 17:11:00,,SYNCED
+TX-1026,SP-007,Cryogenic Pump,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-01 17:24:00,TRF-1025,SYNCED
+TX-1029,SP-006,Diode Laser Pump,PICK,2,Bangalore Repair Hub,2026-08-01 17:46:00,,SYNCED
+TX-1030,SP-003,Hydraulic Servo Valve,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-01 18:10:00,TRF-1030,SYNCED
+TX-1032,SP-004,Fiber Optic Gyroscope,PICK,1,Mumbai Repair Hub,2026-08-01 18:59:00,,SYNCED
+TX-1033,SP-001,Turbine Flow Sensor,PICK,1,Bangalore Repair Hub,2026-08-01 19:43:00,,SYNCED
+TX-1034,SP-006,Diode Laser Pump,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-01 20:25:00,TRF-1034,SYNCED
+TX-1036,SP-003,Hydraulic Servo Valve,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-01 21:13:00,TRF-1036,SYNCED
+TX-1031,SP-003,Hydraulic Servo Valve,TRANSFER_IN,2,Chennai Repair Hub,2026-08-01 22:10:00,TRF-1030,SYNCED
+TX-1038,SP-004,Fiber Optic Gyroscope,PICK,1,Chennai Repair Hub,2026-08-01 22:14:00,,SYNCED
+TX-1035,SP-006,Diode Laser Pump,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-01 22:25:00,TRF-1034,SYNCED
+TX-1039,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-01 22:35:00,TRF-1039,SYNCED
+TX-1041,SP-008,Optical Transceiver Array,PICK,1,Mumbai Repair Hub,2026-08-01 23:38:00,,SYNCED
+TX-1042,SP-005,CNC Controller Board,PICK,2,Mumbai Repair Hub,2026-08-02 00:07:00,,SYNCED
+TX-1037,SP-003,Hydraulic Servo Valve,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-02 01:13:00,TRF-1036,SYNCED
+TX-1043,SP-003,Hydraulic Servo Valve,PICK,2,Bangalore Repair Hub,2026-08-02 01:17:00,,SYNCED
+TX-1040,SP-002,High-Voltage Inverter Module,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-02 02:35:00,TRF-1039,SYNCED
+TX-1044,SP-003,Hydraulic Servo Valve,RECEIPT,4,Mumbai Repair Hub,2026-08-02 02:36:00,,SYNCED
+TX-1045,SP-004,Fiber Optic Gyroscope,PICK,1,Chennai Repair Hub,2026-08-02 03:29:00,,SYNCED
+TX-1046,SP-001,Turbine Flow Sensor,PICK,1,Mumbai Repair Hub,2026-08-02 04:53:00,,SYNCED
+TX-1047,SP-006,Diode Laser Pump,PICK,1,Bangalore Repair Hub,2026-08-02 05:22:00,,SYNCED
+TX-1048,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-02 06:49:00,TRF-1048,SYNCED
+TX-1050,SP-003,Hydraulic Servo Valve,PICK,2,Bangalore Repair Hub,2026-08-02 08:04:00,,SYNCED
+TX-1051,SP-004,Fiber Optic Gyroscope,PICK,2,Mumbai Repair Hub,2026-08-02 08:46:00,,SYNCED
+TX-1049,SP-002,High-Voltage Inverter Module,TRANSFER_IN,1,Bangalore Repair Hub,2026-08-02 08:49:00,TRF-1048,SYNCED
+TX-1052,SP-008,Optical Transceiver Array,PICK,1,Chennai Repair Hub,2026-08-02 09:57:00,,SYNCED
+TX-1053,SP-001,Turbine Flow Sensor,TRANSFER_OUT,1,Mumbai Repair Hub,2026-08-02 10:55:00,TRF-1053,SYNCED
+TX-1055,SP-004,Fiber Optic Gyroscope,RECEIPT,3,Chennai Repair Hub,2026-08-02 11:17:00,,SYNCED
+TX-1056,SP-004,Fiber Optic Gyroscope,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-02 11:41:00,TRF-1056,SYNCED
+TX-1054,SP-001,Turbine Flow Sensor,TRANSFER_IN,1,Chennai Repair Hub,2026-08-02 11:55:00,TRF-1053,SYNCED
+TX-1058,SP-008,Optical Transceiver Array,PICK,1,Bangalore Repair Hub,2026-08-02 12:27:00,,SYNCED
+TX-1059,SP-006,Diode Laser Pump,PICK,1,Bangalore Repair Hub,2026-08-02 13:37:00,,SYNCED
+TX-1060,SP-001,Turbine Flow Sensor,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-02 14:04:00,TRF-1060,SYNCED
+TX-1062,SP-008,Optical Transceiver Array,PICK,2,Chennai Repair Hub,2026-08-02 14:43:00,,SYNCED
+TX-1057,SP-004,Fiber Optic Gyroscope,TRANSFER_IN,1,Chennai Repair Hub,2026-08-02 15:41:00,TRF-1056,SYNCED
+TX-1063,SP-004,Fiber Optic Gyroscope,PICK,1,Chennai Repair Hub,2026-08-02 15:57:00,,SYNCED
+TX-1061,SP-001,Turbine Flow Sensor,TRANSFER_IN,1,Chennai Repair Hub,2026-08-02 16:04:00,TRF-1060,SYNCED
+TX-1064,SP-001,Turbine Flow Sensor,RECEIPT,2,Chennai Repair Hub,2026-08-02 16:18:00,,SYNCED
+TX-1065,SP-007,Cryogenic Pump,PICK,2,Bangalore Repair Hub,2026-08-02 16:54:00,,SYNCED
+TX-1066,SP-003,Hydraulic Servo Valve,PICK,2,Bangalore Repair Hub,2026-08-02 17:16:00,,SYNCED
+TX-1067,SP-008,Optical Transceiver Array,PICK,2,Bangalore Repair Hub,2026-08-02 18:04:00,,SYNCED
+TX-1068,SP-004,Fiber Optic Gyroscope,PICK,1,Bangalore Repair Hub,2026-08-02 18:38:00,,SYNCED
+TX-1069,SP-001,Turbine Flow Sensor,PICK,1,Mumbai Repair Hub,2026-08-02 20:07:00,,SYNCED
+TX-1070,SP-008,Optical Transceiver Array,RECEIPT,4,Mumbai Repair Hub,2026-08-02 21:36:00,,SYNCED
+TX-1071,SP-001,Turbine Flow Sensor,PICK,1,Mumbai Repair Hub,2026-08-02 22:11:00,,SYNCED
+TX-1072,SP-002,High-Voltage Inverter Module,RECEIPT,3,Mumbai Repair Hub,2026-08-02 22:34:00,,SYNCED
+TX-1073,SP-004,Fiber Optic Gyroscope,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-02 23:04:00,TRF-1073,SYNCED
+TX-1075,SP-004,Fiber Optic Gyroscope,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-02 23:52:00,TRF-1075,SYNCED
+TX-1077,SP-005,CNC Controller Board,PICK,1,Bangalore Repair Hub,2026-08-03 00:23:00,,SYNCED
+TX-1078,SP-008,Optical Transceiver Array,RECEIPT,2,Mumbai Repair Hub,2026-08-03 00:39:00,,SYNCED
+TX-1079,SP-004,Fiber Optic Gyroscope,PICK,2,Mumbai Repair Hub,2026-08-03 01:03:00,,SYNCED
+TX-1080,SP-004,Fiber Optic Gyroscope,PICK,2,Bangalore Repair Hub,2026-08-03 01:26:00,,SYNCED
+TX-1074,SP-004,Fiber Optic Gyroscope,TRANSFER_IN,2,Chennai Repair Hub,2026-08-03 02:04:00,TRF-1073,SYNCED
+TX-1081,SP-005,CNC Controller Board,RECEIPT,4,Mumbai Repair Hub,2026-08-03 02:50:00,,SYNCED
+TX-1076,SP-004,Fiber Optic Gyroscope,TRANSFER_IN,2,Chennai Repair Hub,2026-08-03 03:52:00,TRF-1075,SYNCED
+TX-1082,SP-001,Turbine Flow Sensor,TRANSFER_OUT,1,Mumbai Repair Hub,2026-08-03 04:12:00,TRF-1082,SYNCED
+TX-1084,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-03 05:00:00,TRF-1084,SYNCED
+TX-1086,SP-006,Diode Laser Pump,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-03 05:41:00,TRF-1086,SYNCED
+TX-1088,SP-002,High-Voltage Inverter Module,PICK,2,Mumbai Repair Hub,2026-08-03 06:02:00,,SYNCED
+TX-1083,SP-001,Turbine Flow Sensor,TRANSFER_IN,1,Bangalore Repair Hub,2026-08-03 06:12:00,TRF-1082,SYNCED
+TX-1089,SP-001,Turbine Flow Sensor,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-03 06:22:00,TRF-1089,SYNCED
+TX-1091,SP-007,Cryogenic Pump,PICK,1,Mumbai Repair Hub,2026-08-03 07:47:00,,SYNCED
+TX-1085,SP-002,High-Voltage Inverter Module,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-03 08:00:00,TRF-1084,SYNCED
+TX-1092,SP-001,Turbine Flow Sensor,TRANSFER_OUT,2,Bangalore Repair Hub,2026-08-03 08:21:00,TRF-1092,SYNCED
+TX-1094,SP-005,CNC Controller Board,RECEIPT,2,Bangalore Repair Hub,2026-08-03 08:41:00,,SYNCED
+TX-1087,SP-006,Diode Laser Pump,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-03 08:41:00,TRF-1086,SYNCED
+TX-1095,SP-004,Fiber Optic Gyroscope,PICK,1,Mumbai Repair Hub,2026-08-03 09:41:00,,SYNCED
+TX-1093,SP-001,Turbine Flow Sensor,TRANSFER_IN,2,Chennai Repair Hub,2026-08-03 10:21:00,TRF-1092,SYNCED
+TX-1090,SP-001,Turbine Flow Sensor,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-03 10:22:00,TRF-1089,SYNCED
+TX-1096,SP-007,Cryogenic Pump,TRANSFER_OUT,1,Mumbai Repair Hub,2026-08-03 10:41:00,TRF-1096,SYNCED
+TX-1098,SP-001,Turbine Flow Sensor,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-03 11:48:00,TRF-1098,SYNCED
+TX-1100,SP-003,Hydraulic Servo Valve,PICK,1,Mumbai Repair Hub,2026-08-03 12:37:00,,SYNCED
+TX-1097,SP-007,Cryogenic Pump,TRANSFER_IN,1,Chennai Repair Hub,2026-08-03 12:41:00,TRF-1096,SYNCED
+TX-1099,SP-001,Turbine Flow Sensor,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-03 13:48:00,TRF-1098,SYNCED
+TX-1101,SP-004,Fiber Optic Gyroscope,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-03 13:52:00,TRF-1101,SYNCED
+TX-1103,SP-004,Fiber Optic Gyroscope,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-03 14:36:00,TRF-1103,SYNCED
+TX-1105,SP-005,CNC Controller Board,TRANSFER_OUT,2,Bangalore Repair Hub,2026-08-03 14:59:00,TRF-1105,SYNCED
+TX-1107,SP-005,CNC Controller Board,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-03 15:28:00,TRF-1107,SYNCED
+TX-1106,SP-005,CNC Controller Board,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-03 15:59:00,TRF-1105,SYNCED
+TX-1108,SP-005,CNC Controller Board,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-03 16:28:00,TRF-1107,SYNCED
+TX-1109,SP-006,Diode Laser Pump,TRANSFER_OUT,1,Mumbai Repair Hub,2026-08-03 16:38:00,TRF-1109,SYNCED
+TX-1102,SP-004,Fiber Optic Gyroscope,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-03 16:52:00,TRF-1101,SYNCED
+TX-1104,SP-004,Fiber Optic Gyroscope,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-03 17:36:00,TRF-1103,SYNCED
+TX-1111,SP-004,Fiber Optic Gyroscope,PICK,2,Bangalore Repair Hub,2026-08-03 18:06:00,,SYNCED
+TX-1112,SP-004,Fiber Optic Gyroscope,PICK,2,Bangalore Repair Hub,2026-08-03 18:21:00,,SYNCED
+TX-1113,SP-002,High-Voltage Inverter Module,RECEIPT,4,Mumbai Repair Hub,2026-08-03 19:16:00,,SYNCED
+TX-1114,SP-007,Cryogenic Pump,PICK,2,Bangalore Repair Hub,2026-08-03 20:10:00,,SYNCED
+TX-1110,SP-006,Diode Laser Pump,TRANSFER_IN,1,Bangalore Repair Hub,2026-08-03 20:38:00,TRF-1109,SYNCED
+TX-1115,SP-003,Hydraulic Servo Valve,PICK,2,Chennai Repair Hub,2026-08-03 21:35:00,,SYNCED
+TX-1116,SP-005,CNC Controller Board,PICK,1,Bangalore Repair Hub,2026-08-03 22:12:00,,SYNCED
+TX-1117,SP-005,CNC Controller Board,PICK,2,Chennai Repair Hub,2026-08-03 23:05:00,,SYNCED
+TX-1118,SP-008,Optical Transceiver Array,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-04 00:19:00,TRF-1118,SYNCED
+TX-1120,SP-006,Diode Laser Pump,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-04 01:10:00,TRF-1120,SYNCED
+TX-1119,SP-008,Optical Transceiver Array,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-04 01:19:00,TRF-1118,SYNCED
+TX-1122,SP-003,Hydraulic Servo Valve,PICK,2,Chennai Repair Hub,2026-08-04 01:50:00,,SYNCED
+TX-1123,SP-008,Optical Transceiver Array,RECEIPT,4,Bangalore Repair Hub,2026-08-04 02:14:00,,SYNCED
+TX-1124,SP-007,Cryogenic Pump,PICK,1,Bangalore Repair Hub,2026-08-04 02:53:00,,SYNCED
+TX-1125,SP-002,High-Voltage Inverter Module,PICK,2,Bangalore Repair Hub,2026-08-04 03:08:00,,SYNCED
+TX-1121,SP-006,Diode Laser Pump,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-04 03:10:00,TRF-1120,SYNCED
+TX-1126,SP-004,Fiber Optic Gyroscope,PICK,2,Chennai Repair Hub,2026-08-04 03:29:00,,SYNCED
+TX-1127,SP-006,Diode Laser Pump,TRANSFER_OUT,2,Bangalore Repair Hub,2026-08-04 04:51:00,TRF-1127,SYNCED
+TX-1129,SP-008,Optical Transceiver Array,TRANSFER_OUT,2,Bangalore Repair Hub,2026-08-04 06:06:00,TRF-1129,SYNCED
+TX-1128,SP-006,Diode Laser Pump,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-04 06:51:00,TRF-1127,SYNCED
+TX-1131,SP-008,Optical Transceiver Array,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-04 06:56:00,TRF-1131,SYNCED
+TX-1133,SP-002,High-Voltage Inverter Module,PICK,2,Chennai Repair Hub,2026-08-04 07:51:00,,SYNCED
+TX-1130,SP-008,Optical Transceiver Array,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-04 08:06:00,TRF-1129,SYNCED
+TX-1134,SP-004,Fiber Optic Gyroscope,PICK,2,Chennai Repair Hub,2026-08-04 08:25:00,,SYNCED
+TX-1135,SP-008,Optical Transceiver Array,PICK,2,Bangalore Repair Hub,2026-08-04 09:49:00,,SYNCED
+TX-1132,SP-008,Optical Transceiver Array,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-04 09:56:00,TRF-1131,SYNCED
+TX-1136,SP-001,Turbine Flow Sensor,PICK,1,Mumbai Repair Hub,2026-08-04 10:53:00,,SYNCED
+TX-1137,SP-005,CNC Controller Board,RECEIPT,3,Bangalore Repair Hub,2026-08-04 11:53:00,,SYNCED
+TX-1138,SP-004,Fiber Optic Gyroscope,PICK,2,Bangalore Repair Hub,2026-08-04 13:16:00,,SYNCED
+TX-1139,SP-001,Turbine Flow Sensor,PICK,2,Bangalore Repair Hub,2026-08-04 14:33:00,,SYNCED
+TX-1140,SP-008,Optical Transceiver Array,RECEIPT,4,Chennai Repair Hub,2026-08-04 15:09:00,,SYNCED
+TX-1141,SP-007,Cryogenic Pump,TRANSFER_OUT,1,Mumbai Repair Hub,2026-08-04 15:27:00,TRF-1141,SYNCED
+TX-1143,SP-008,Optical Transceiver Array,PICK,2,Chennai Repair Hub,2026-08-04 15:59:00,,SYNCED
+TX-1144,SP-004,Fiber Optic Gyroscope,PICK,2,Bangalore Repair Hub,2026-08-04 16:55:00,,SYNCED
+TX-1145,SP-007,Cryogenic Pump,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-04 17:45:00,TRF-1145,SYNCED
+TX-1147,SP-004,Fiber Optic Gyroscope,PICK,1,Mumbai Repair Hub,2026-08-04 18:44:00,,SYNCED
+TX-1146,SP-007,Cryogenic Pump,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-04 18:45:00,TRF-1145,SYNCED
+TX-1148,SP-004,Fiber Optic Gyroscope,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-04 19:02:00,TRF-1148,SYNCED
+TX-1142,SP-007,Cryogenic Pump,TRANSFER_IN,1,Chennai Repair Hub,2026-08-04 19:27:00,TRF-1141,SYNCED
+TX-1150,SP-002,High-Voltage Inverter Module,RECEIPT,3,Mumbai Repair Hub,2026-08-04 20:17:00,,SYNCED
+TX-1149,SP-004,Fiber Optic Gyroscope,TRANSFER_IN,1,Bangalore Repair Hub,2026-08-04 21:02:00,TRF-1148,SYNCED
+TX-1151,SP-006,Diode Laser Pump,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-04 21:04:00,TRF-1151,SYNCED
+TX-1153,SP-001,Turbine Flow Sensor,TRANSFER_OUT,2,Bangalore Repair Hub,2026-08-04 21:32:00,TRF-1153,SYNCED
+TX-1155,SP-004,Fiber Optic Gyroscope,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-04 21:56:00,TRF-1155,SYNCED
+TX-1157,SP-007,Cryogenic Pump,PICK,2,Mumbai Repair Hub,2026-08-04 22:55:00,,SYNCED
+TX-1156,SP-004,Fiber Optic Gyroscope,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-04 22:56:00,TRF-1155,SYNCED
+TX-1158,SP-007,Cryogenic Pump,PICK,2,Bangalore Repair Hub,2026-08-04 23:11:00,,SYNCED
+TX-1154,SP-001,Turbine Flow Sensor,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-04 23:32:00,TRF-1153,SYNCED
+TX-1152,SP-006,Diode Laser Pump,TRANSFER_IN,1,Bangalore Repair Hub,2026-08-05 00:04:00,TRF-1151,SYNCED
+TX-1159,SP-003,Hydraulic Servo Valve,PICK,2,Bangalore Repair Hub,2026-08-05 00:24:00,,SYNCED
+TX-1160,SP-008,Optical Transceiver Array,PICK,2,Bangalore Repair Hub,2026-08-05 01:47:00,,SYNCED
+TX-1161,SP-004,Fiber Optic Gyroscope,PICK,2,Chennai Repair Hub,2026-08-05 02:43:00,,SYNCED
+TX-1162,SP-008,Optical Transceiver Array,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-05 03:29:00,TRF-1162,SYNCED
+TX-1163,SP-008,Optical Transceiver Array,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-05 04:29:00,TRF-1162,SYNCED
+TX-1164,SP-006,Diode Laser Pump,PICK,2,Chennai Repair Hub,2026-08-05 04:47:00,,SYNCED
+TX-1165,SP-006,Diode Laser Pump,RECEIPT,4,Bangalore Repair Hub,2026-08-05 05:35:00,,SYNCED
+TX-1166,SP-001,Turbine Flow Sensor,RECEIPT,2,Mumbai Repair Hub,2026-08-05 06:25:00,,SYNCED
+TX-1167,SP-007,Cryogenic Pump,TRANSFER_OUT,2,Bangalore Repair Hub,2026-08-05 07:10:00,TRF-1167,SYNCED
+TX-1169,SP-001,Turbine Flow Sensor,PICK,2,Chennai Repair Hub,2026-08-05 08:22:00,,SYNCED
+TX-1170,SP-005,CNC Controller Board,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-05 09:08:00,TRF-1170,SYNCED
+TX-1172,SP-006,Diode Laser Pump,TRANSFER_OUT,2,Bangalore Repair Hub,2026-08-05 10:33:00,TRF-1172,SYNCED
+TX-1168,SP-007,Cryogenic Pump,TRANSFER_IN,2,Chennai Repair Hub,2026-08-05 11:10:00,TRF-1167,SYNCED
+TX-1174,SP-002,High-Voltage Inverter Module,PICK,1,Mumbai Repair Hub,2026-08-05 11:17:00,,SYNCED
+TX-1175,SP-003,Hydraulic Servo Valve,PICK,2,Chennai Repair Hub,2026-08-05 12:40:00,,SYNCED
+TX-1171,SP-005,CNC Controller Board,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-05 13:08:00,TRF-1170,SYNCED
+TX-1176,SP-005,CNC Controller Board,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-05 13:30:00,TRF-1176,SYNCED
+TX-1173,SP-006,Diode Laser Pump,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-05 13:33:00,TRF-1172,SYNCED
+TX-1178,SP-005,CNC Controller Board,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-05 14:07:00,TRF-1178,SYNCED
+TX-1180,SP-005,CNC Controller Board,RECEIPT,4,Mumbai Repair Hub,2026-08-05 14:28:00,,SYNCED
+TX-1179,SP-005,CNC Controller Board,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-05 15:07:00,TRF-1178,SYNCED
+TX-1181,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-05 15:45:00,TRF-1181,SYNCED
+TX-1177,SP-005,CNC Controller Board,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-05 16:30:00,TRF-1176,SYNCED
+TX-1183,SP-003,Hydraulic Servo Valve,PICK,2,Chennai Repair Hub,2026-08-05 16:43:00,,SYNCED
+TX-1184,SP-002,High-Voltage Inverter Module,PICK,1,Bangalore Repair Hub,2026-08-05 17:12:00,,SYNCED
+TX-1185,SP-003,Hydraulic Servo Valve,RECEIPT,2,Mumbai Repair Hub,2026-08-05 17:46:00,,SYNCED
+TX-1186,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-05 18:32:00,TRF-1186,SYNCED
+TX-1188,SP-005,CNC Controller Board,RECEIPT,3,Mumbai Repair Hub,2026-08-05 19:43:00,,SYNCED
+TX-1182,SP-002,High-Voltage Inverter Module,TRANSFER_IN,2,Mumbai Repair Hub,2026-08-05 19:45:00,TRF-1181,SYNCED
+TX-1189,SP-001,Turbine Flow Sensor,RECEIPT,2,Mumbai Repair Hub,2026-08-05 21:10:00,,SYNCED
+TX-1190,SP-004,Fiber Optic Gyroscope,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-05 21:51:00,TRF-1190,SYNCED
+TX-1187,SP-002,High-Voltage Inverter Module,TRANSFER_IN,2,Chennai Repair Hub,2026-08-05 22:32:00,TRF-1186,SYNCED
+TX-1192,SP-002,High-Voltage Inverter Module,PICK,2,Chennai Repair Hub,2026-08-05 23:16:00,,SYNCED
+TX-1191,SP-004,Fiber Optic Gyroscope,TRANSFER_IN,1,Chennai Repair Hub,2026-08-05 23:51:00,TRF-1190,SYNCED
+TX-1193,SP-005,CNC Controller Board,PICK,2,Chennai Repair Hub,2026-08-06 00:31:00,,SYNCED
+TX-1194,SP-002,High-Voltage Inverter Module,PICK,2,Mumbai Repair Hub,2026-08-06 01:44:00,,SYNCED
+TX-1195,SP-004,Fiber Optic Gyroscope,PICK,1,Bangalore Repair Hub,2026-08-06 03:14:00,,SYNCED
+TX-1196,SP-005,CNC Controller Board,PICK,1,Chennai Repair Hub,2026-08-06 03:48:00,,SYNCED
+TX-1197,SP-005,CNC Controller Board,PICK,2,Bangalore Repair Hub,2026-08-06 04:42:00,,SYNCED
+TX-1198,SP-005,CNC Controller Board,PICK,2,Mumbai Repair Hub,2026-08-06 05:48:00,,SYNCED
+TX-1199,SP-001,Turbine Flow Sensor,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-06 06:13:00,TRF-1199,SYNCED
+TX-1201,SP-001,Turbine Flow Sensor,TRANSFER_OUT,1,Mumbai Repair Hub,2026-08-06 06:57:00,TRF-1201,SYNCED
+TX-1200,SP-001,Turbine Flow Sensor,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-06 07:13:00,TRF-1199,SYNCED
+TX-1203,SP-008,Optical Transceiver Array,PICK,2,Bangalore Repair Hub,2026-08-06 08:18:00,,SYNCED
+TX-1204,SP-002,High-Voltage Inverter Module,PICK,2,Bangalore Repair Hub,2026-08-06 09:35:00,,SYNCED
+TX-1205,SP-002,High-Voltage Inverter Module,PICK,2,Chennai Repair Hub,2026-08-06 10:31:00,,SYNCED
+TX-1202,SP-001,Turbine Flow Sensor,TRANSFER_IN,1,Chennai Repair Hub,2026-08-06 10:57:00,TRF-1201,SYNCED
+TX-1206,SP-007,Cryogenic Pump,PICK,1,Mumbai Repair Hub,2026-08-06 11:22:00,,SYNCED
+TX-1207,SP-005,CNC Controller Board,PICK,2,Bangalore Repair Hub,2026-08-06 12:17:00,,SYNCED
+TX-1208,SP-001,Turbine Flow Sensor,RECEIPT,3,Mumbai Repair Hub,2026-08-06 13:37:00,,SYNCED
+TX-1209,SP-001,Turbine Flow Sensor,PICK,2,Chennai Repair Hub,2026-08-06 14:44:00,,SYNCED
+TX-1210,SP-001,Turbine Flow Sensor,PICK,1,Chennai Repair Hub,2026-08-06 15:55:00,,SYNCED
+TX-1211,SP-008,Optical Transceiver Array,PICK,1,Mumbai Repair Hub,2026-08-06 16:46:00,,SYNCED
+TX-1212,SP-003,Hydraulic Servo Valve,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-06 17:31:00,TRF-1212,SYNCED
+TX-1214,SP-008,Optical Transceiver Array,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-06 18:00:00,TRF-1214,SYNCED
+TX-1216,SP-005,CNC Controller Board,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-06 19:20:00,TRF-1216,SYNCED
+TX-1213,SP-003,Hydraulic Servo Valve,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-06 19:31:00,TRF-1212,SYNCED
+TX-1218,SP-003,Hydraulic Servo Valve,PICK,1,Bangalore Repair Hub,2026-08-06 20:45:00,,SYNCED
+TX-1215,SP-008,Optical Transceiver Array,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-06 21:00:00,TRF-1214,SYNCED
+TX-1219,SP-005,CNC Controller Board,PICK,2,Bangalore Repair Hub,2026-08-06 21:08:00,,SYNCED
+TX-1220,SP-005,CNC Controller Board,PICK,2,Mumbai Repair Hub,2026-08-06 21:23:00,,SYNCED
+TX-1221,SP-008,Optical Transceiver Array,PICK,2,Mumbai Repair Hub,2026-08-06 21:57:00,,SYNCED
+TX-1217,SP-005,CNC Controller Board,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-06 23:20:00,TRF-1216,SYNCED
+TX-1222,SP-007,Cryogenic Pump,RECEIPT,2,Bangalore Repair Hub,2026-08-06 23:22:00,,SYNCED
+TX-1223,SP-007,Cryogenic Pump,RECEIPT,3,Chennai Repair Hub,2026-08-07 00:07:00,,SYNCED
+TX-1224,SP-006,Diode Laser Pump,PICK,2,Mumbai Repair Hub,2026-08-07 00:27:00,,SYNCED
+TX-1225,SP-003,Hydraulic Servo Valve,RECEIPT,2,Bangalore Repair Hub,2026-08-07 01:31:00,,SYNCED
+TX-1226,SP-006,Diode Laser Pump,RECEIPT,3,Chennai Repair Hub,2026-08-07 02:50:00,,SYNCED
+TX-1227,SP-008,Optical Transceiver Array,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-07 03:17:00,TRF-1227,SYNCED
+TX-1228,SP-008,Optical Transceiver Array,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-07 04:17:00,TRF-1227,SYNCED
+TX-1229,SP-005,CNC Controller Board,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-07 04:32:00,TRF-1229,SYNCED
+TX-1231,SP-007,Cryogenic Pump,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-07 05:55:00,TRF-1231,SYNCED
+TX-1233,SP-005,CNC Controller Board,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-07 06:40:00,TRF-1233,SYNCED
+TX-1232,SP-007,Cryogenic Pump,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-07 06:55:00,TRF-1231,SYNCED
+TX-1230,SP-005,CNC Controller Board,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-07 07:32:00,TRF-1229,SYNCED
+TX-1234,SP-005,CNC Controller Board,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-07 07:40:00,TRF-1233,SYNCED
+TX-1235,SP-003,Hydraulic Servo Valve,PICK,1,Mumbai Repair Hub,2026-08-07 07:51:00,,SYNCED
+TX-1236,SP-006,Diode Laser Pump,PICK,2,Chennai Repair Hub,2026-08-07 08:11:00,,SYNCED
+TX-1239,SP-004,Fiber Optic Gyroscope,RECEIPT,2,Bangalore Repair Hub,2026-08-07 11:51:00,,SYNCED
+TX-1240,SP-008,Optical Transceiver Array,PICK,2,Mumbai Repair Hub,2026-08-07 12:35:00,,SYNCED
+TX-1241,SP-008,Optical Transceiver Array,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-07 12:51:00,TRF-1241,SYNCED
+TX-1243,SP-005,CNC Controller Board,RECEIPT,4,Mumbai Repair Hub,2026-08-07 13:50:00,,SYNCED
+TX-1244,SP-008,Optical Transceiver Array,PICK,2,Bangalore Repair Hub,2026-08-07 14:37:00,,SYNCED
+TX-1242,SP-008,Optical Transceiver Array,TRANSFER_IN,1,Chennai Repair Hub,2026-08-07 16:51:00,TRF-1241,SYNCED
+TX-1246,SP-005,CNC Controller Board,PICK,2,Mumbai Repair Hub,2026-08-07 16:53:00,,SYNCED
+TX-1247,SP-001,Turbine Flow Sensor,RECEIPT,4,Mumbai Repair Hub,2026-08-07 17:43:00,,SYNCED
+TX-1248,SP-008,Optical Transceiver Array,TRANSFER_OUT,2,Bangalore Repair Hub,2026-08-07 18:04:00,TRF-1248,SYNCED
+TX-1250,SP-005,CNC Controller Board,TRANSFER_OUT,1,Mumbai Repair Hub,2026-08-07 18:43:00,TRF-1250,SYNCED
+TX-1252,SP-008,Optical Transceiver Array,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-07 19:37:00,TRF-1252,SYNCED
+TX-1251,SP-005,CNC Controller Board,TRANSFER_IN,1,Chennai Repair Hub,2026-08-07 19:43:00,TRF-1250,SYNCED
+TX-1249,SP-008,Optical Transceiver Array,TRANSFER_IN,2,Chennai Repair Hub,2026-08-07 20:04:00,TRF-1248,SYNCED
+TX-1254,SP-007,Cryogenic Pump,PICK,2,Chennai Repair Hub,2026-08-07 20:33:00,,SYNCED
+TX-1255,SP-005,CNC Controller Board,PICK,2,Chennai Repair Hub,2026-08-07 21:55:00,,SYNCED
+TX-1253,SP-008,Optical Transceiver Array,TRANSFER_IN,1,Bangalore Repair Hub,2026-08-07 22:37:00,TRF-1252,SYNCED
+TX-1256,SP-006,Diode Laser Pump,PICK,1,Chennai Repair Hub,2026-08-07 22:47:00,,SYNCED
+TX-1257,SP-004,Fiber Optic Gyroscope,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-07 23:20:00,TRF-1257,SYNCED
+TX-1258,SP-004,Fiber Optic Gyroscope,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-08 00:20:00,TRF-1257,SYNCED
+TX-1259,SP-001,Turbine Flow Sensor,PICK,2,Bangalore Repair Hub,2026-08-08 00:25:00,,SYNCED
+TX-1260,SP-005,CNC Controller Board,PICK,2,Mumbai Repair Hub,2026-08-08 01:27:00,,SYNCED
+TX-1261,SP-004,Fiber Optic Gyroscope,PICK,2,Bangalore Repair Hub,2026-08-08 01:55:00,,SYNCED
+TX-1262,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-08 02:38:00,TRF-1262,SYNCED
+TX-1264,SP-001,Turbine Flow Sensor,PICK,2,Chennai Repair Hub,2026-08-08 03:10:00,,SYNCED
+TX-1263,SP-002,High-Voltage Inverter Module,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-08 03:38:00,TRF-1262,SYNCED
+TX-1265,SP-002,High-Voltage Inverter Module,RECEIPT,2,Chennai Repair Hub,2026-08-08 03:39:00,,SYNCED
+TX-1266,SP-008,Optical Transceiver Array,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-08 04:43:00,TRF-1266,SYNCED
+TX-1268,SP-008,Optical Transceiver Array,PICK,2,Mumbai Repair Hub,2026-08-08 05:10:00,,SYNCED
+TX-1269,SP-006,Diode Laser Pump,PICK,1,Chennai Repair Hub,2026-08-08 05:29:00,,SYNCED
+TX-1270,SP-002,High-Voltage Inverter Module,PICK,2,Mumbai Repair Hub,2026-08-08 06:30:00,,SYNCED
+TX-1271,SP-007,Cryogenic Pump,PICK,1,Bangalore Repair Hub,2026-08-08 06:52:00,,SYNCED
+TX-1272,SP-002,High-Voltage Inverter Module,PICK,1,Mumbai Repair Hub,2026-08-08 08:05:00,,SYNCED
+TX-1273,SP-006,Diode Laser Pump,RECEIPT,4,Chennai Repair Hub,2026-08-08 08:26:00,,SYNCED
+TX-1267,SP-008,Optical Transceiver Array,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-08 08:43:00,TRF-1266,SYNCED
+TX-1274,SP-002,High-Voltage Inverter Module,PICK,1,Mumbai Repair Hub,2026-08-08 09:07:00,,SYNCED
+TX-1275,SP-006,Diode Laser Pump,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-08 09:51:00,TRF-1275,SYNCED
+TX-1279,SP-006,Diode Laser Pump,PICK,1,Chennai Repair Hub,2026-08-08 11:25:00,,SYNCED
+TX-1276,SP-006,Diode Laser Pump,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-08 11:51:00,TRF-1275,SYNCED
+TX-1280,SP-007,Cryogenic Pump,PICK,1,Mumbai Repair Hub,2026-08-08 11:56:00,,SYNCED
+TX-1281,SP-008,Optical Transceiver Array,PICK,1,Bangalore Repair Hub,2026-08-08 13:11:00,,SYNCED
+TX-1282,SP-004,Fiber Optic Gyroscope,PICK,2,Mumbai Repair Hub,2026-08-08 14:23:00,,SYNCED
+TX-1283,SP-001,Turbine Flow Sensor,RECEIPT,3,Chennai Repair Hub,2026-08-08 15:36:00,,SYNCED
+TX-1284,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-08 16:45:00,TRF-1284,SYNCED
+TX-1285,SP-002,High-Voltage Inverter Module,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-08 17:45:00,TRF-1284,SYNCED
+TX-1287,SP-006,Diode Laser Pump,RECEIPT,4,Bangalore Repair Hub,2026-08-08 19:10:00,,SYNCED
+TX-1288,SP-008,Optical Transceiver Array,TRANSFER_OUT,1,Mumbai Repair Hub,2026-08-08 20:02:00,TRF-1288,SYNCED
+TX-1290,SP-008,Optical Transceiver Array,PICK,2,Chennai Repair Hub,2026-08-08 21:12:00,,SYNCED
+TX-1289,SP-008,Optical Transceiver Array,TRANSFER_IN,1,Chennai Repair Hub,2026-08-08 22:02:00,TRF-1288,SYNCED
+TX-1291,SP-007,Cryogenic Pump,PICK,2,Mumbai Repair Hub,2026-08-08 22:18:00,,SYNCED
+TX-1292,SP-005,CNC Controller Board,RECEIPT,4,Bangalore Repair Hub,2026-08-08 23:13:00,,SYNCED
+TX-1294,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,1,Mumbai Repair Hub,2026-08-09 01:38:00,TRF-1294,SYNCED
+TX-1296,SP-007,Cryogenic Pump,RECEIPT,3,Bangalore Repair Hub,2026-08-09 02:08:00,,SYNCED
+TX-1297,SP-005,CNC Controller Board,PICK,1,Mumbai Repair Hub,2026-08-09 02:29:00,,SYNCED
+TX-1298,SP-004,Fiber Optic Gyroscope,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-09 03:57:00,TRF-1298,SYNCED
+TX-1295,SP-002,High-Voltage Inverter Module,TRANSFER_IN,1,Chennai Repair Hub,2026-08-09 04:38:00,TRF-1294,SYNCED
+TX-1300,SP-006,Diode Laser Pump,TRANSFER_OUT,2,Chennai Repair Hub,2026-08-09 05:23:00,TRF-1300,SYNCED
+TX-1302,SP-001,Turbine Flow Sensor,PICK,2,Chennai Repair Hub,2026-08-09 06:12:00,,SYNCED
+TX-1301,SP-006,Diode Laser Pump,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-09 06:23:00,TRF-1300,SYNCED
+TX-1299,SP-004,Fiber Optic Gyroscope,TRANSFER_IN,1,Bangalore Repair Hub,2026-08-09 06:57:00,TRF-1298,SYNCED
+TX-1303,SP-006,Diode Laser Pump,PICK,1,Chennai Repair Hub,2026-08-09 07:10:00,,SYNCED
+TX-1304,SP-007,Cryogenic Pump,PICK,1,Chennai Repair Hub,2026-08-09 08:37:00,,SYNCED
+TX-1305,SP-004,Fiber Optic Gyroscope,PICK,2,Bangalore Repair Hub,2026-08-09 09:03:00,,SYNCED
+TX-1306,SP-006,Diode Laser Pump,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-09 09:38:00,TRF-1306,SYNCED
+TX-1308,SP-001,Turbine Flow Sensor,PICK,2,Mumbai Repair Hub,2026-08-09 10:13:00,,SYNCED
+TX-1309,SP-008,Optical Transceiver Array,PICK,2,Mumbai Repair Hub,2026-08-09 11:22:00,,SYNCED
+TX-1307,SP-006,Diode Laser Pump,TRANSFER_IN,1,Chennai Repair Hub,2026-08-09 11:38:00,TRF-1306,SYNCED
+TX-1310,SP-002,High-Voltage Inverter Module,PICK,2,Bangalore Repair Hub,2026-08-09 12:04:00,,SYNCED
+TX-1311,SP-008,Optical Transceiver Array,TRANSFER_OUT,1,Mumbai Repair Hub,2026-08-09 13:34:00,TRF-1311,SYNCED
+TX-1313,SP-001,Turbine Flow Sensor,PICK,1,Chennai Repair Hub,2026-08-09 13:56:00,,SYNCED
+TX-1314,SP-005,CNC Controller Board,PICK,1,Bangalore Repair Hub,2026-08-09 14:28:00,,SYNCED
+TX-1315,SP-007,Cryogenic Pump,PICK,1,Chennai Repair Hub,2026-08-09 15:46:00,,SYNCED
+TX-1316,SP-006,Diode Laser Pump,PICK,1,Chennai Repair Hub,2026-08-09 17:05:00,,SYNCED
+TX-1312,SP-008,Optical Transceiver Array,TRANSFER_IN,1,Chennai Repair Hub,2026-08-09 17:34:00,TRF-1311,SYNCED
+TX-1317,SP-001,Turbine Flow Sensor,RECEIPT,3,Bangalore Repair Hub,2026-08-09 18:15:00,,SYNCED
+TX-1318,SP-007,Cryogenic Pump,PICK,2,Mumbai Repair Hub,2026-08-09 19:43:00,,SYNCED
+TX-1319,SP-002,High-Voltage Inverter Module,PICK,2,Bangalore Repair Hub,2026-08-09 20:35:00,,SYNCED
+TX-1320,SP-008,Optical Transceiver Array,RECEIPT,2,Mumbai Repair Hub,2026-08-09 21:11:00,,SYNCED
+TX-1321,SP-002,High-Voltage Inverter Module,PICK,2,Chennai Repair Hub,2026-08-09 22:21:00,,SYNCED
+TX-1322,SP-002,High-Voltage Inverter Module,RECEIPT,4,Bangalore Repair Hub,2026-08-09 23:43:00,,SYNCED
+TX-1324,SP-002,High-Voltage Inverter Module,PICK,2,Mumbai Repair Hub,2026-08-10 02:01:00,,SYNCED
+TX-1328,SP-006,Diode Laser Pump,PICK,2,Mumbai Repair Hub,2026-08-10 05:51:00,,SYNCED
+TX-1330,SP-001,Turbine Flow Sensor,PICK,2,Bangalore Repair Hub,2026-08-10 07:44:00,,SYNCED
+TX-1331,SP-008,Optical Transceiver Array,PICK,2,Chennai Repair Hub,2026-08-10 08:58:00,,SYNCED
+TX-1332,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-10 09:22:00,TRF-1332,SYNCED
+TX-1333,SP-002,High-Voltage Inverter Module,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-10 10:22:00,TRF-1332,SYNCED
+TX-1335,SP-008,Optical Transceiver Array,TRANSFER_OUT,1,Chennai Repair Hub,2026-08-10 10:56:00,TRF-1335,SYNCED
+TX-1337,SP-004,Fiber Optic Gyroscope,PICK,2,Mumbai Repair Hub,2026-08-10 11:16:00,,SYNCED
+TX-1338,SP-003,Hydraulic Servo Valve,PICK,2,Bangalore Repair Hub,2026-08-10 12:38:00,,SYNCED
+TX-1336,SP-008,Optical Transceiver Array,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-10 12:56:00,TRF-1335,SYNCED
+TX-1339,SP-007,Cryogenic Pump,TRANSFER_OUT,2,Bangalore Repair Hub,2026-08-10 13:42:00,TRF-1339,SYNCED
+TX-1341,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-10 14:39:00,TRF-1341,SYNCED
+TX-1340,SP-007,Cryogenic Pump,TRANSFER_IN,2,Chennai Repair Hub,2026-08-10 14:42:00,TRF-1339,SYNCED
+TX-1343,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-10 15:36:00,TRF-1343,SYNCED
+TX-1345,SP-002,High-Voltage Inverter Module,TRANSFER_OUT,1,Bangalore Repair Hub,2026-08-10 16:07:00,TRF-1345,SYNCED
+TX-1342,SP-002,High-Voltage Inverter Module,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-10 16:39:00,TRF-1341,SYNCED
+TX-1346,SP-002,High-Voltage Inverter Module,TRANSFER_IN,1,Mumbai Repair Hub,2026-08-10 17:07:00,TRF-1345,SYNCED
+TX-1347,SP-006,Diode Laser Pump,PICK,1,Chennai Repair Hub,2026-08-10 17:16:00,,SYNCED
+TX-1348,SP-006,Diode Laser Pump,PICK,1,Bangalore Repair Hub,2026-08-10 17:58:00,,SYNCED
+TX-1344,SP-002,High-Voltage Inverter Module,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-10 19:36:00,TRF-1343,SYNCED
+TX-1349,SP-001,Turbine Flow Sensor,TRANSFER_OUT,3,Chennai Repair Hub,2026-08-10 19:58:00,TRF-FAIL-901,SYNCED
+TX-1350,SP-002,High-Voltage Inverter Module,RECEIPT,4,Mumbai Repair Hub,2026-08-10 22:58:00,,SYNCED
+TX-1351,SP-002,High-Voltage Inverter Module,RECEIPT,4,Mumbai Repair Hub,2026-08-10 23:02:00,,SYNCED
+TX-1352,SP-003,Hydraulic Servo Valve,PICK,2,Chennai Repair Hub,2026-08-11 00:58:00,,PENDING_SYNC
+TX-1353,SP-004,Fiber Optic Gyroscope,TRANSFER_IN,2,Bangalore Repair Hub,2026-08-11 01:58:00,TRF-TIME-808,SYNCED
+TX-1354,SP-004,Fiber Optic Gyroscope,TRANSFER_OUT,2,Mumbai Repair Hub,2026-08-11 04:58:00,TRF-TIME-808,SYNCED
