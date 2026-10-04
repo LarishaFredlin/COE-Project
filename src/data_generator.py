@@ -1,301 +1,441 @@
-"""
-SpareSync Data Generator
-Generates synthetic inventory transactions and physical count audits with known failure scenarios and ground truth labels.
-"""
 
 import random
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Tuple
+
 import pandas as pd
 
-# Paths
-BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data"
-DATA_DIR.mkdir(exist_ok=True, parents=True)
+
+# --------------------------------------------------
+# DATASET PATHS
+# --------------------------------------------------
+
+DATA_DIR = Path("data")
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 TRANSACTIONS_FILE = DATA_DIR / "transactions.csv"
 PHYSICAL_COUNTS_FILE = DATA_DIR / "physical_counts.csv"
 
-# Catalog and Locations
+
+# --------------------------------------------------
+# PARTS CATALOG
+# --------------------------------------------------
+
 PARTS_CATALOG = {
     "SP-001": "Turbine Flow Sensor",
     "SP-002": "High-Voltage Inverter Module",
     "SP-003": "Hydraulic Servo Valve",
     "SP-004": "Fiber Optic Gyroscope",
-    "SP-005": "CNC Controller Board",
-    "SP-006": "Diode Laser Pump",
-    "SP-007": "Cryogenic Pump",
-    "SP-008": "Optical Transceiver Array",
+    "SP-005": "Precision Bearing Assembly",
+    "SP-006": "Cooling Pump",
+    "SP-007": "Power Control Unit",
+    "SP-008": "Pressure Regulator",
 }
 
-LOCATIONS = [
-    "Chennai Repair Hub",
-    "Bangalore Repair Hub",
-    "Mumbai Repair Hub",
-]
+PARTS = list(PARTS_CATALOG.keys())
+
+LOCATIONS = ["Chennai", "Bangalore", "Mumbai"]
 
 
-def generate_synthetic_data(seed: int = 42, num_records: int = 350) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """
-    Generates realistic inventory transactions and physical counts.
-    Injects 4 specific failure modes with ground truth:
-      1. Missing TRANSFER_IN after TRANSFER_OUT (SP-001 at Bangalore)
-      2. Duplicate RECEIPT transaction (SP-002 at Mumbai)
-      3. Unsynchronized PICK due to network outage (SP-003 at Chennai)
-      4. Out-of-order timestamp sequence (SP-004 at Bangalore)
-    """
+# --------------------------------------------------
+# DATA GENERATOR
+# --------------------------------------------------
+
+def generate_synthetic_data(seed=42, num_records=350):
+
     random.seed(seed)
-    transactions = []
-    current_time = datetime(2026, 8, 1, 8, 0, 0)
-    tx_id_counter = 1000
 
-    # Ground truth mapping: (part_id, location) -> ground_truth_cause
+    current_time = datetime(2026, 8, 1, 8, 0)
+
+    transactions = []
+
+    running_balance = {
+        (part, location): 0
+        for part in PARTS
+        for location in LOCATIONS
+    }
+
     ground_truth_map = {}
 
-    # Running inventory balance per (part_id, location)
-    running_balance = {(pid, loc): 0 for pid in PARTS_CATALOG.keys() for loc in LOCATIONS}
+    tx_id = 1000
 
-    # 1. Initial Stock Receipts for all parts and locations
-    for part_id, part_name in PARTS_CATALOG.items():
-        for loc in LOCATIONS:
-            tx_id_counter += 1
-            current_time += timedelta(minutes=random.randint(10, 30))
-            init_qty = random.randint(10, 20)
-            
-            transactions.append({
-                "transaction_id": f"TX-{tx_id_counter}",
-                "part_id": part_id,
-                "part_name": part_name,
-                "event_type": "RECEIPT",
-                "quantity": init_qty,
-                "location": loc,
-                "timestamp": current_time.strftime("%Y-%m-%d %H:%M:%S"),
-                "transfer_id": "",
-                "sync_status": "SYNCED"
-            })
-            running_balance[(part_id, loc)] += init_qty
+    # --------------------------------------------------
+    # TRANSACTION HELPER
+    # --------------------------------------------------
 
-    # 2. Standard routine transactions (Picks, Receipts, Completed Transfers)
-    part_keys = list(PARTS_CATALOG.keys())
+    def add_transaction(
+        part,
+        location,
+        event_type,
+        quantity,
+        timestamp,
+        sync_status="SYNCED",
+        transfer_id=None,
+    ):
+        nonlocal tx_id
+
+        transactions.append({
+            "transaction_id": tx_id,
+            "part_id": part,
+            "part_name": PARTS_CATALOG[part],
+            "location": location,
+            "event_type": event_type,
+            "quantity": quantity,
+            "timestamp": timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+            "sync_status": sync_status,
+            "transfer_id": transfer_id,
+        })
+
+        tx_id += 1
+
+    # --------------------------------------------------
+    # INITIAL STOCK RECEIPTS
+    # --------------------------------------------------
+
+    for part in PARTS:
+        for location in LOCATIONS:
+
+            quantity = random.randint(10, 20)
+
+            add_transaction(
+                part,
+                location,
+                "RECEIPT",
+                quantity,
+                current_time,
+            )
+
+            running_balance[(part, location)] += quantity
+
+    # --------------------------------------------------
+    # ROUTINE TRANSACTIONS
+    # --------------------------------------------------
+
     while len(transactions) < num_records - 15:
-        tx_id_counter += 1
-        current_time += timedelta(minutes=random.randint(15, 90))
-        part_id = random.choice(part_keys)
-        part_name = PARTS_CATALOG[part_id]
-        loc = random.choice(LOCATIONS)
-        
-        event_choice = random.choices(["PICK", "TRANSFER", "RECEIPT"], weights=[0.55, 0.30, 0.15])[0]
 
-        if event_choice == "PICK":
-            if running_balance[(part_id, loc)] > 2:
-                pick_qty = random.randint(1, 2)
-                transactions.append({
-                    "transaction_id": f"TX-{tx_id_counter}",
-                    "part_id": part_id,
-                    "part_name": part_name,
-                    "event_type": "PICK",
-                    "quantity": pick_qty,
-                    "location": loc,
-                    "timestamp": current_time.strftime("%Y-%m-%d %H:%M:%S"),
-                    "transfer_id": "",
-                    "sync_status": "SYNCED"
-                })
-                running_balance[(part_id, loc)] -= pick_qty
+        part = random.choice(PARTS)
+        location = random.choice(LOCATIONS)
 
-        elif event_choice == "TRANSFER":
-            src_loc = loc
-            dst_loc = random.choice([l for l in LOCATIONS if l != src_loc])
-            if running_balance[(part_id, src_loc)] > 3:
-                trf_qty = random.randint(1, 2)
-                trf_id = f"TRF-{tx_id_counter}"
-                
-                # Outbound
-                transactions.append({
-                    "transaction_id": f"TX-{tx_id_counter}",
-                    "part_id": part_id,
-                    "part_name": part_name,
-                    "event_type": "TRANSFER_OUT",
-                    "quantity": trf_qty,
-                    "location": src_loc,
-                    "timestamp": current_time.strftime("%Y-%m-%d %H:%M:%S"),
-                    "transfer_id": trf_id,
-                    "sync_status": "SYNCED"
-                })
-                running_balance[(part_id, src_loc)] -= trf_qty
+        event = random.choices(
+            ["PICK", "TRANSFER", "RECEIPT"],
+            weights=[0.55, 0.30, 0.15],
+        )[0]
 
-                # Inbound (matched)
-                tx_id_counter += 1
-                in_time = current_time + timedelta(hours=random.randint(1, 4))
-                transactions.append({
-                    "transaction_id": f"TX-{tx_id_counter}",
-                    "part_id": part_id,
-                    "part_name": part_name,
-                    "event_type": "TRANSFER_IN",
-                    "quantity": trf_qty,
-                    "location": dst_loc,
-                    "timestamp": in_time.strftime("%Y-%m-%d %H:%M:%S"),
-                    "transfer_id": trf_id,
-                    "sync_status": "SYNCED"
-                })
-                running_balance[(part_id, dst_loc)] += trf_qty
+        current_time += timedelta(
+            minutes=random.randint(10, 180)
+        )
 
-        elif event_choice == "RECEIPT":
-            rcv_qty = random.randint(2, 4)
-            transactions.append({
-                "transaction_id": f"TX-{tx_id_counter}",
-                "part_id": part_id,
-                "part_name": part_name,
-                "event_type": "RECEIPT",
-                "quantity": rcv_qty,
-                "location": loc,
-                "timestamp": current_time.strftime("%Y-%m-%d %H:%M:%S"),
-                "transfer_id": "",
-                "sync_status": "SYNCED"
-            })
-            running_balance[(part_id, loc)] += rcv_qty
+        if event == "PICK":
 
-    # 3. INJECTED FAILURE 1: Missing TRANSFER_IN (SP-001: Chennai -> Bangalore)
-    tx_id_counter += 1
-    current_time += timedelta(hours=2)
-    f1_part = "SP-001"
-    f1_trf_id = "TRF-FAIL-901"
-    f1_qty = 3
-    transactions.append({
-        "transaction_id": f"TX-{tx_id_counter}",
-        "part_id": f1_part,
-        "part_name": PARTS_CATALOG[f1_part],
-        "event_type": "TRANSFER_OUT",
-        "quantity": f1_qty,
-        "location": "Chennai Repair Hub",
-        "timestamp": current_time.strftime("%Y-%m-%d %H:%M:%S"),
-        "transfer_id": f1_trf_id,
-        "sync_status": "SYNCED"
-    })
-    running_balance[(f1_part, "Chennai Repair Hub")] -= f1_qty
-    # The physical parts arrived at Bangalore, but TRANSFER_IN was never recorded in system ledger
-    running_balance[(f1_part, "Bangalore Repair Hub")] += f1_qty
-    ground_truth_map[(f1_part, "Bangalore Repair Hub")] = "MISSING_TRANSFER"
+            available = running_balance[(part, location)]
 
-    # 4. INJECTED FAILURE 2: Duplicate RECEIPT (SP-002 at Mumbai Repair Hub)
-    tx_id_counter += 1
-    current_time += timedelta(hours=3)
-    f2_part = "SP-002"
-    f2_qty = 4
-    t_dup1 = current_time
-    t_dup2 = current_time + timedelta(minutes=4)
-    transactions.append({
-        "transaction_id": f"TX-{tx_id_counter}",
-        "part_id": f2_part,
-        "part_name": PARTS_CATALOG[f2_part],
-        "event_type": "RECEIPT",
-        "quantity": f2_qty,
-        "location": "Mumbai Repair Hub",
-        "timestamp": t_dup1.strftime("%Y-%m-%d %H:%M:%S"),
-        "transfer_id": "",
-        "sync_status": "SYNCED"
-    })
-    tx_id_counter += 1
-    transactions.append({
-        "transaction_id": f"TX-{tx_id_counter}",
-        "part_id": f2_part,
-        "part_name": PARTS_CATALOG[f2_part],
-        "event_type": "RECEIPT",
-        "quantity": f2_qty,
-        "location": "Mumbai Repair Hub",
-        "timestamp": t_dup2.strftime("%Y-%m-%d %H:%M:%S"),
-        "transfer_id": "",
-        "sync_status": "SYNCED"
-    })
-    running_balance[(f2_part, "Mumbai Repair Hub")] += f2_qty
-    ground_truth_map[(f2_part, "Mumbai Repair Hub")] = "DUPLICATE_TRANSACTION"
+            if available > 2:
 
-    # 5. INJECTED FAILURE 3: Network Failure (PENDING_SYNC PICK on SP-003 at Chennai Repair Hub)
-    tx_id_counter += 1
-    current_time += timedelta(hours=2)
-    f3_part = "SP-003"
-    f3_qty = 2
-    transactions.append({
-        "transaction_id": f"TX-{tx_id_counter}",
-        "part_id": f3_part,
-        "part_name": PARTS_CATALOG[f3_part],
-        "event_type": "PICK",
-        "quantity": f3_qty,
-        "location": "Chennai Repair Hub",
-        "timestamp": current_time.strftime("%Y-%m-%d %H:%M:%S"),
-        "transfer_id": "",
-        "sync_status": "PENDING_SYNC"
-    })
-    running_balance[(f3_part, "Chennai Repair Hub")] -= f3_qty
-    ground_truth_map[(f3_part, "Chennai Repair Hub")] = "NETWORK_SYNC_FAILURE"
+                quantity = random.randint(
+                    1,
+                    min(2, available),
+                )
 
-    # 6. INJECTED FAILURE 4: Timestamp Anomaly (SP-004 at Bangalore Repair Hub)
-    tx_id_counter += 1
-    current_time += timedelta(hours=2)
-    f4_part = "SP-004"
-    f4_trf_id = "TRF-TIME-808"
-    f4_qty = 2
-    t_out = current_time + timedelta(hours=2)
-    t_in = current_time - timedelta(hours=1)
-    transactions.append({
-        "transaction_id": f"TX-{tx_id_counter}",
-        "part_id": f4_part,
-        "part_name": PARTS_CATALOG[f4_part],
-        "event_type": "TRANSFER_IN",
-        "quantity": f4_qty,
-        "location": "Bangalore Repair Hub",
-        "timestamp": t_in.strftime("%Y-%m-%d %H:%M:%S"),
-        "transfer_id": f4_trf_id,
-        "sync_status": "SYNCED"
-    })
-    tx_id_counter += 1
-    transactions.append({
-        "transaction_id": f"TX-{tx_id_counter}",
-        "part_id": f4_part,
-        "part_name": PARTS_CATALOG[f4_part],
-        "event_type": "TRANSFER_OUT",
-        "quantity": f4_qty,
-        "location": "Mumbai Repair Hub",
-        "timestamp": t_out.strftime("%Y-%m-%d %H:%M:%S"),
-        "transfer_id": f4_trf_id,
-        "sync_status": "SYNCED"
-    })
-    running_balance[(f4_part, "Mumbai Repair Hub")] -= f4_qty
-    running_balance[(f4_part, "Bangalore Repair Hub")] += f4_qty
-    ground_truth_map[(f4_part, "Bangalore Repair Hub")] = "TIMESTAMP_ANOMALY"
+                add_transaction(
+                    part,
+                    location,
+                    "PICK",
+                    quantity,
+                    current_time,
+                )
 
-    # 7. Generate Physical Counts with Ground Truth Labels
-    df_tx = pd.DataFrame(transactions)
-    df_tx["parsed_ts"] = pd.to_datetime(df_tx["timestamp"])
-    df_tx = df_tx.sort_values(by="parsed_ts").drop(columns=["parsed_ts"]).reset_index(drop=True)
+                running_balance[(part, location)] -= quantity
 
-    physical_counts = []
+        elif event == "RECEIPT":
+
+            quantity = random.randint(2, 4)
+
+            add_transaction(
+                part,
+                location,
+                "RECEIPT",
+                quantity,
+                current_time,
+            )
+
+            running_balance[(part, location)] += quantity
+
+        elif event == "TRANSFER":
+
+            destination = random.choice(
+                [
+                    loc for loc in LOCATIONS
+                    if loc != location
+                ]
+            )
+
+            available = running_balance[(part, location)]
+
+            if available > 3:
+
+                quantity = random.randint(
+                    1,
+                    min(2, available),
+                )
+
+                transfer_id = f"TR-{tx_id}"
+
+                add_transaction(
+                    part,
+                    location,
+                    "TRANSFER_OUT",
+                    quantity,
+                    current_time,
+                    transfer_id=transfer_id,
+                )
+
+                running_balance[(part, location)] -= quantity
+
+                add_transaction(
+                    part,
+                    destination,
+                    "TRANSFER_IN",
+                    quantity,
+                    current_time + timedelta(
+                        hours=random.randint(1, 4)
+                    ),
+                    transfer_id=transfer_id,
+                )
+
+                running_balance[(part, destination)] += quantity
+
+    # --------------------------------------------------
+    # FAILURE 1: MISSING TRANSFER
+    # --------------------------------------------------
+
+    part = "SP-001"
+    source = "Chennai"
+    destination = "Bangalore"
+    quantity = 3
+
+    transfer_id = "TR-MISSING-001"
+
+    add_transaction(
+        part,
+        source,
+        "TRANSFER_OUT",
+        quantity,
+        current_time,
+        transfer_id=transfer_id,
+    )
+
+    running_balance[(part, source)] -= quantity
+
+    # Physical stock has arrived at destination,
+    # but the destination receipt confirmation is missing.
+    running_balance[(part, destination)] += quantity
+
+    ground_truth_map[(part, destination)] = "MISSING_TRANSFER"
+
+    # --------------------------------------------------
+    # FAILURE 2: DUPLICATE RECEIPT
+    # --------------------------------------------------
+
+    part = "SP-002"
+    location = "Mumbai"
+    quantity = 4
+
+    add_transaction(
+        part,
+        location,
+        "RECEIPT",
+        quantity,
+        current_time,
+    )
+
+    add_transaction(
+        part,
+        location,
+        "RECEIPT",
+        quantity,
+        current_time + timedelta(minutes=4),
+    )
+
+    # Physical stock reflects only one actual delivery.
+    running_balance[(part, location)] += quantity
+
+    ground_truth_map[(part, location)] = "DUPLICATE_TRANSACTION"
+
+    # --------------------------------------------------
+    # FAILURE 3: NETWORK SYNC FAILURE
+    # --------------------------------------------------
+
+    part = "SP-003"
+    location = "Chennai"
+    quantity = 2
+
+    add_transaction(
+        part,
+        location,
+        "PICK",
+        quantity,
+        current_time,
+        sync_status="PENDING",
+    )
+
+    running_balance[(part, location)] -= quantity
+
+    ground_truth_map[(part, location)] = "NETWORK_SYNC_FAILURE"
+
+    # --------------------------------------------------
+    # FAILURE 4: TIMESTAMP ANOMALY
+    # --------------------------------------------------
+
+    part = "SP-004"
+    source = "Mumbai"
+    destination = "Bangalore"
+    quantity = 2
+
+    transfer_id = "TR-TIME-004"
+
+    add_transaction(
+        part,
+        destination,
+        "TRANSFER_IN",
+        quantity,
+        current_time - timedelta(hours=1),
+        transfer_id=transfer_id,
+    )
+
+    add_transaction(
+        part,
+        source,
+        "TRANSFER_OUT",
+        quantity,
+        current_time + timedelta(hours=2),
+        transfer_id=transfer_id,
+    )
+
+    running_balance[(part, source)] -= quantity
+    running_balance[(part, destination)] += quantity
+
+    ground_truth_map[(part, destination)] = "TIMESTAMP_ANOMALY"
+
+    # --------------------------------------------------
+    # ADJUSTMENT EVENT
+    # --------------------------------------------------
+
+    # Controlled adjustment example.
+    # Positive quantity increases stock.
+
+    part = "SP-008"
+    location = "Chennai"
+
+    adjustment_quantity = 2
+
+    adjustment_time = current_time + timedelta(hours=3)
+
+    add_transaction(
+        part,
+        location,
+        "ADJUSTMENT",
+        adjustment_quantity,
+        adjustment_time,
+    )
+
+    running_balance[(part, location)] += adjustment_quantity
+
+    # --------------------------------------------------
+    # PHYSICAL COUNT GENERATION
+    # --------------------------------------------------
+
     audit_time = current_time + timedelta(hours=12)
 
-    for part_id, part_name in PARTS_CATALOG.items():
-        for loc in LOCATIONS:
-            phys_stock = running_balance[(part_id, loc)]
-            gt_cause = ground_truth_map.get((part_id, loc), "NONE")
+    physical_counts = []
+
+    for part in PARTS:
+
+        for location in LOCATIONS:
+
+            physical_stock = max(
+                0,
+                running_balance[(part, location)],
+            )
 
             physical_counts.append({
-                "part_id": part_id,
-                "part_name": part_name,
-                "location": loc,
-                "physical_stock": max(0, phys_stock),
-                "ground_truth_cause": gt_cause,
-                "last_audit_timestamp": audit_time.strftime("%Y-%m-%d %H:%M:%S")
+                "part_id": part,
+                "part_name": PARTS_CATALOG[part],
+                "location": location,
+                "physical_stock": physical_stock,
+                "ground_truth": ground_truth_map.get(
+                    (part, location),
+                    "NONE",
+                ),
+                "audit_timestamp": audit_time.strftime(
+                    "%Y-%m-%d %H:%M:%S"
+                ),
             })
 
-    df_counts = pd.DataFrame(physical_counts)
+            # Physical count is an observation,
+            # not a stock movement.
 
-    # Save to disk
-    df_tx.to_csv(TRANSACTIONS_FILE, index=False)
-    df_counts.to_csv(PHYSICAL_COUNTS_FILE, index=False)
+            add_transaction(
+                part,
+                location,
+                "PHYSICAL_COUNT",
+                physical_stock,
+                audit_time,
+            )
 
-    return df_tx, df_counts
+    # --------------------------------------------------
+    # DATAFRAME CREATION
+    # --------------------------------------------------
 
+    df_transactions = pd.DataFrame(transactions)
+
+    df_physical = pd.DataFrame(physical_counts)
+
+    # --------------------------------------------------
+    # SORT TRANSACTIONS
+    # --------------------------------------------------
+
+    df_transactions["timestamp"] = pd.to_datetime(
+        df_transactions["timestamp"]
+    )
+
+    df_transactions = df_transactions.sort_values(
+        "timestamp"
+    ).reset_index(drop=True)
+
+    df_transactions["timestamp"] = (
+        df_transactions["timestamp"].dt.strftime(
+            "%Y-%m-%d %H:%M:%S"
+        )
+    )
+
+    # --------------------------------------------------
+    # SAVE DATASETS
+    # --------------------------------------------------
+
+    df_transactions.to_csv(
+        TRANSACTIONS_FILE,
+        index=False,
+    )
+
+    df_physical.to_csv(
+        PHYSICAL_COUNTS_FILE,
+        index=False,
+    )
+
+    print("Synthetic data generated successfully!")
+
+    print(f"Transactions: {len(df_transactions)}")
+    print(f"Physical counts: {len(df_physical)}")
+
+    print(f"Saved: {TRANSACTIONS_FILE}")
+    print(f"Saved: {PHYSICAL_COUNTS_FILE}")
+
+    return df_transactions, df_physical
+
+
+# --------------------------------------------------
+# MAIN
+# --------------------------------------------------
 
 if __name__ == "__main__":
-    df_t, df_c = generate_synthetic_data()
-    print(f"Generated {len(df_t)} transactions -> {TRANSACTIONS_FILE}")
-    print(f"Generated {len(df_c)} physical count records -> {PHYSICAL_COUNTS_FILE}")
+    generate_synthetic_data()

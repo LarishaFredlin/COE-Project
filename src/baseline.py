@@ -8,31 +8,53 @@ from typing import Dict, Any, List, Optional
 import pandas as pd
 
 
-def calculate_system_stock(df_transactions: pd.DataFrame, part_id: str, location: Optional[str] = None) -> int:
+
+def calculate_system_stock(
+    df_transactions: pd.DataFrame,
+    part_id: str,
+    location: Optional[str] = None
+) -> int:
     """
-    Computes system stock from transaction ledger by summing credits and debits.
-    Only considers SYNCED transactions in central ledger stock.
+    Computes system stock from the transaction ledger.
+
+    Only SYNCED transactions are included in central system stock.
+    Physical counts are observations, not stock movements.
     """
+
     df = df_transactions.copy()
-    df = df[(df["part_id"] == part_id) & (df["sync_status"] == "SYNCED")]
-    
+
+    df = df[
+        (df["part_id"] == part_id) &
+        (df["sync_status"] == "SYNCED")
+    ]
+
     if location:
         df = df[df["location"] == location]
 
     stock = 0
+
     for _, row in df.iterrows():
-        etype = str(row["event_type"]).upper().strip()
-        qty = int(row["quantity"])
 
-        if etype in ["RECEIPT", "TRANSFER_IN"]:
-            stock += qty
-        elif etype in ["PICK", "TRANSFER_OUT"]:
-            stock -= qty
-        elif etype == "ADJUSTMENT":
-            stock += qty
+        event_type = str(row["event_type"]).upper().strip()
+        quantity = int(row["quantity"])
 
-    return max(0, stock)
+        if event_type in ["RECEIPT", "TRANSFER_IN"]:
+            stock += quantity
 
+        elif event_type in ["PICK", "TRANSFER_OUT"]:
+            stock -= quantity
+
+        elif event_type == "ADJUSTMENT":
+            # Adjustment quantity must be signed:
+            # +5 means increase, -5 means decrease.
+            stock += quantity
+
+        elif event_type == "PHYSICAL_COUNT":
+            # A physical count is an observation.
+            # It must not modify ledger stock.
+            continue
+
+    return stock
 
 def compute_baseline_audit(
     df_transactions: pd.DataFrame,
