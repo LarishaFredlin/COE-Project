@@ -1,3 +1,4 @@
+
 # Python
 __pycache__/
 *.py[cod]
@@ -24,8 +25,16 @@ lib64/
 # Streamlit
 .streamlit/
 
-# Data files that will be auto-generated
+# Generated SQLite databases
 data/offline_queue.db
+data/sparesync.db
+data/*.db-wal
+data/*.db-shm
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
 
 # Pytest
 .pytest_cache/
@@ -49,6 +58,6 @@ coverage.xml
 # Logs
 *.log
 
-# Temporary
+# Temporary and backup files
 *.tmp
 *.bak

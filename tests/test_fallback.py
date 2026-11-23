@@ -127,3 +127,54 @@ def test_manual_fallback_transaction_creation(temp_fallback_handler):
     main_df = pd.read_csv(handler.transactions_file)
     assert len(main_df) == 2  # 1 initial + 1 manual
     assert main_df.iloc[-1]["sync_status"] == "MANUAL_PENDING_VERIFICATION"
+
+
+def test_sync_does_not_duplicate_existing_transaction(temp_fallback_handler):
+    """A transaction already in the CSV must not be appended again."""
+    handler = temp_fallback_handler
+
+    # Create a pending offline transaction.
+    tx = handler.record_offline_transaction(
+        part_id="SP-001",
+        event_type="PICK",
+        quantity=2,
+        location="Chennai Repair Hub",
+        reason="Network outage"
+    )
+
+    # Simulate a previous sync that wrote to CSV
+    # but crashed before updating SQLite.
+    existing_df = pd.read_csv(handler.transactions_file)
+
+    duplicate_row = {
+        "transaction_id": tx["transaction_id"],
+        "part_id": tx["part_id"],
+        "part_name": tx["part_name"],
+        "event_type": tx["event_type"],
+        "quantity": tx["quantity"],
+        "location": tx["location"],
+        "timestamp": tx["timestamp"],
+        "transfer_id": "",
+        "sync_status": "SYNCED"
+    }
+
+    existing_df = pd.concat(
+        [existing_df, pd.DataFrame([duplicate_row])],
+        ignore_index=True
+    )
+
+    existing_df.to_csv(handler.transactions_file, index=False)
+
+    # Retry synchronization.
+    handler.sync_pending_transactions()
+
+    # Verify the transaction exists only once.
+    final_df = pd.read_csv(handler.transactions_file)
+
+    transaction_count = (
+        final_df["transaction_id"] == tx["transaction_id"]
+    ).sum()
+
+    assert transaction_count == 1
+    assert len(handler.get_pending_transactions()) == 0
+

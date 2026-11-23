@@ -37,3 +37,75 @@ def test_baseline_detects_variance_without_explanation():
     assert res["has_variance"] is True
     assert res["status"] == "Variance Detected"
     assert "No explanation provided by baseline system" in res["explanation"]
+
+
+def test_missing_required_column_raises_error():
+    """Missing transaction columns should produce a clear validation error."""
+    sample_tx = pd.DataFrame([
+        {
+            "part_id": "SP-001",
+            "event_type": "RECEIPT",
+            "quantity": 10,
+            "location": "Chennai Repair Hub"
+        }
+    ])
+
+    with pytest.raises(ValueError, match="sync_status"):
+        calculate_system_stock(sample_tx, "SP-001")
+
+
+def test_invalid_quantity_raises_error():
+    """Non-numeric quantities should not silently corrupt stock calculations."""
+    sample_tx = pd.DataFrame([
+        {
+            "part_id": "SP-001",
+            "event_type": "RECEIPT",
+            "quantity": "invalid",
+            "location": "Chennai Repair Hub",
+            "sync_status": "SYNCED"
+        }
+    ])
+
+    with pytest.raises(ValueError, match="quantity"):
+        calculate_system_stock(sample_tx, "SP-001")
+
+
+def test_unknown_event_type_raises_error():
+    """Unsupported transaction types should not be silently ignored."""
+    sample_tx = pd.DataFrame([
+        {
+            "part_id": "SP-001",
+            "event_type": "UNKNOWN_EVENT",
+            "quantity": 5,
+            "location": "Chennai Repair Hub",
+            "sync_status": "SYNCED"
+        }
+    ])
+
+    with pytest.raises(ValueError, match="event_type"):
+        calculate_system_stock(sample_tx, "SP-001")
+
+
+def test_physical_count_does_not_change_system_stock():
+    """Physical count records must not affect ledger stock."""
+    sample_tx = pd.DataFrame([
+        {
+            "part_id": "SP-001",
+            "event_type": "RECEIPT",
+            "quantity": 10,
+            "location": "Chennai Repair Hub",
+            "sync_status": "SYNCED"
+        },
+        {
+            "part_id": "SP-001",
+            "event_type": "PHYSICAL_COUNT",
+            "quantity": 50,
+            "location": "Chennai Repair Hub",
+            "sync_status": "SYNCED"
+        }
+    ])
+
+    assert calculate_system_stock(
+        sample_tx, "SP-001", "Chennai Repair Hub"
+    ) == 10
+

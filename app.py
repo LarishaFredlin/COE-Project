@@ -591,26 +591,24 @@ st.sidebar.markdown("---")
 st.sidebar.markdown("### 📌 Project Scope")
 
 st.sidebar.info(
-
-    "**Review 1 Prototype (35% Scope)**\n\n"
-
-    "• Rule-Based Reconciliation\n"
-
-    "• Decision Trade-Off Analysis\n"
-
-    "• Chronological Stream Analysis\n"
-
-    "• Injected Failure Scenarios\n"
-
-    "• Baseline Comparison & Metrics\n"
-
-    "• Store-and-Forward Resilience\n\n"
-    "**Review 2 Additions**\n"
+    "**Review 1 – Core Engine**\n\n"
+    "• Rule-Based Inventory Reconciliation\n"
+    "• Chronological Transaction Analysis\n"
+    "• Root-Cause Diagnostics & Evidence\n"
+    "• Decision Trade-Offs and Failure Simulation\n"
+    "• Baseline Metrics and Offline Fallback\n\n"
+    "**Review 2 – Advanced Diagnostics**\n"
     "• Risk-Based Investigation Queue\n"
-    "• Evidence-Driven Case Workbench\n"
+    "• Evidence-Driven Investigation Workbench\n"
     "• Data Quality & Audit Checks\n"
-    "• What-If Scenario Planning"
-
+    "• What-If Scenario Planning\n\n"
+    "**Review 3 – Backend & Reliability**\n"
+    "• FastAPI REST Backend Integration\n"
+    "• SQLite-Persisted Investigation Records\n"
+    "• Investigation Create, Read, Update & Delete\n"
+    "• Pydantic Input Validation & Variance Calculation\n"
+    "• Safer Baseline Validation and Offline Sync\n"
+    "• Expanded Automated Tests and Technical Docs"
 )
 
 
@@ -843,6 +841,47 @@ if nav_choice == "📊 Dashboard":
 
     )
 
+
+    # Review 3 implementation summary
+    st.markdown("---")
+    st.markdown("## 🚀 Review 3 – Engineering Improvements")
+    st.markdown(
+        "The latest milestone strengthens SpareSync beyond the Streamlit prototype "
+        "with a persistent API-backed investigation workflow, stricter data handling, "
+        "and expanded verification."
+    )
+
+    review3_col1, review3_col2 = st.columns(2)
+    with review3_col1:
+        st.markdown("### 🔌 Backend & Persistence")
+        st.markdown(
+            "- **FastAPI REST backend** for investigation management.\n"
+            "- **SQLite persistence** for investigation records, notes, and status.\n"
+            "- **CRUD endpoints** to create, retrieve, update, and delete investigations.\n"
+            "- **Streamlit API client** connects the Workbench to the backend."
+        )
+        st.markdown("### 🧾 Validation & Data Integrity")
+        st.markdown(
+            "- **Pydantic request validation** for investigation inputs.\n"
+            "- **Automatic variance calculation** from system and physical stock.\n"
+            "- **Baseline input checks** for required columns, numeric quantities, and event types."
+        )
+
+    with review3_col2:
+        st.markdown("### 🔄 Reliability Improvements")
+        st.markdown(
+            "- **Duplicate-safe offline synchronization** to avoid re-appending transactions.\n"
+            "- **Atomic CSV updates** during synchronization to reduce partial-write risk.\n"
+            "- **Database transaction handling** with commit, rollback, and connection cleanup."
+        )
+        st.markdown("### 🧪 Testing & Documentation")
+        st.markdown(
+            "- **52 automated tests passed** in the latest verified test run.\n"
+            "- Added API, database, and API-client test coverage.\n"
+            "- Added architecture, API, database-schema, and testing documentation."
+        )
+
+    st.success("Review 3 improvements implemented and verified in the current project build.")
 
 
 

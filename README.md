@@ -1,248 +1,374 @@
 # SpareSync – Inventory Transaction Reconciliation Engine
 
-> **Operational Intelligence for Multi-Hub Spare Parts Repair Networks**  
-> *Academic Milestone: Review 1 Prototype (~35% Complete Scope)*
-
----
+> **Operational Intelligence for Multi-Hub Spare Parts Repair Networks**
 
 ## 1. Project Overview
 
-**SpareSync** is a rule-based transaction reconciliation engine designed for multi-echelon repair networks holding expensive, slow-moving spare parts (e.g., turbine flow sensors, high-voltage inverters, hydraulic servo valves, optical gyroscopes).
+**SpareSync** is an inventory transaction reconciliation and investigation management system designed for multi-location spare parts repair networks.
 
-In industrial maintenance networks, system-recorded inventory and physical stock frequently diverge. Standard enterprise systems merely flag the variance ($System - Physical \ne 0$) and demand costly manual cycle counts. **SpareSync** shifts the paradigm from simple discrepancy detection to automated root-cause investigation by analyzing the chronological stream of receipts, picks, transfers, and status logs to explain *why* the discrepancy occurred and recommend the most effective recovery action.
+The system identifies discrepancies between system-recorded inventory and physical stock. It analyzes chronological transaction records, detects potential operational failures, generates evidence-based root-cause explanations, and recommends recovery actions.
 
----
+SpareSync combines rule-based diagnostics, operational decision support, failure simulation, offline transaction handling, and persistent investigation management.
 
 ## 2. Business Problem
 
-Repair networks face unique inventory synchronization challenges:
-- **Unconfirmed Inter-Location Transfers:** Parts are dispatched from a source hub (`TRANSFER_OUT`) but never receipt-confirmed (`TRANSFER_IN`) at the destination hub.
-- **Duplicate Barcode / System Scans:** Technicians accidentally scan the same delivery docket twice within minutes, artificially inflating system stock.
-- **Network Synchronization Failures:** Edge handheld terminals record consumption picks during router/network outages, caching transactions in `PENDING_SYNC` status while the central ledger remains unaware.
-- **Timestamp & Sequence Anomalies:** NTP clock drift on warehouse scanners causes receipts to be timestamped after subsequent pick events.
-- **Clerical Count Errors:** Auditors transcribe manual count sheets incorrectly.
+Multi-location repair networks face several inventory synchronization challenges:
 
----
+- **Unconfirmed Inter-Location Transfers:** Parts are dispatched from a source location but the destination receipt is not recorded.
+- **Duplicate Transactions:** Repeated scans can artificially increase system-recorded stock.
+- **Network Synchronization Failures:** Transactions recorded during network outages may remain pending synchronization.
+- **Timestamp Anomalies:** Incorrect timestamps can cause transaction events to appear in the wrong chronological order.
+- **Physical Count Discrepancies:** Manual counting and data-entry errors can create differences between recorded and actual stock.
+
+Traditional inventory systems identify stock differences but may not explain the operational events responsible for them.
+
+SpareSync addresses this limitation through transaction analysis and evidence-based diagnostics.
 
 ## 3. Key Features
 
-- **Automated Root-Cause Diagnostic Engine:** Evaluates transaction streams against explainable rule routines.
-- **Chronological Sequence Analysis:** Replays events in causal order to isolate the exact point of divergence.
-- **Fact-Based Evidence Generation:** Supplies itemized transaction IDs, timestamps, and transfer tags supporting every diagnostic finding.
-- **Transparent Confidence Scoring:** Computes deterministic confidence ratings (High / Medium) based on matching evidence strength.
-- **Operational Decision Trade-Off Analysis:** Exposes multi-criteria trade-offs (**Cost, Time, Emissions, Reliability**) for every recommended recovery action.
-- **Interactive Failure Simulation Sandbox:** Interactively injects and demonstrates supply chain failure modes with before/after state transitions.
-- **Operational Resilience & Fallback Layer:** Edge SQLite store-and-forward queueing during network outages and manual fallback data entry for scanner/sensor failures.
-- **Quantitative Benchmark & Evaluation Framework:** Dynamically calculates Explanation Accuracy, Unexplained Variance Reduction, and computational latency against ground-truth labels.
-- **Interactive Operations Dashboard:** Built with Streamlit and Plotly for high-visibility management reporting, transaction inspection, trade-off analysis, and comparative evaluation.
+### Inventory Reconciliation
+- Calculates system stock and compares it with physical inventory.
+- Identifies inventory discrepancies.
+- Analyzes chronological transaction sequences.
 
----
+### Advanced Diagnostics
+- Uses transparent, rule-based diagnostic logic.
+- Prioritizes potential root causes.
+- Provides supporting transaction evidence and confidence information.
 
-## 4. System Architecture
+### Investigation Workbench
+- Provides an interface for investigating discrepancy cases.
+- Displays diagnostic evidence and recommended actions.
+- Supports investigation status and notes.
 
-```
-sparesync/
+### Data Quality and Audit
+- Validates transaction data.
+- Identifies data quality issues.
+- Supports audit-oriented analysis.
+
+### Scenario Planner
+- Supports what-if inventory adjustment analysis.
+- Helps evaluate possible changes without modifying original source data.
+
+### Operational Decision Support
+- Compares recovery alternatives using cost, time, emissions, and reliability.
+- Provides information to support operational decisions.
+
+### Failure Simulation
+- Simulates missing transfers, duplicate receipts, network failures, and timestamp anomalies.
+- Demonstrates how the reconciliation engine responds to different failure scenarios.
+
+### Operational Resilience
+- Uses SQLite-based offline transaction queueing.
+- Supports store-and-forward synchronization.
+- Provides manual fallback transaction entry.
+
+### FastAPI Investigation Backend
+- Provides REST API endpoints for investigation management.
+- Supports creating, retrieving, updating, and deleting investigations.
+- Uses Pydantic schemas for request validation.
+- Stores investigation records in SQLite.
+
+### Automated Testing
+- Uses pytest to validate core modules, database operations, API endpoints, and frontend API client behavior.
+
+## 4. Technology Stack
+
+| Category | Technologies |
+|---|---|
+| Programming Language | Python |
+| Frontend | Streamlit |
+| API Framework | FastAPI |
+| API Client | HTTPX |
+| Database | SQLite |
+| Data Processing | Pandas |
+| Visualizations | Plotly |
+| Data Validation | Pydantic |
+| Testing | Pytest |
+| Development Environment | Visual Studio Code |
+
+## 5. System Architecture
+
+SpareSync follows a modular architecture consisting of the following components:
+
+1. **Presentation Layer:** Streamlit application.
+2. **Processing Layer:** Inventory reconciliation, diagnostics, metrics, trade-offs, and simulation modules.
+3. **API Layer:** FastAPI endpoints for investigation management.
+4. **Service Layer:** Investigation business logic and CRUD operations.
+5. **Database Layer:** SQLite persistent investigation storage.
+
+The FastAPI backend and Streamlit application are currently maintained as separate components. The frontend API client is available, and complete integration with the main Streamlit application remains part of the final development work.
+
+For more details, see [System Architecture](docs/architecture.md).
+
+## 6. Project Directory Structure
+
+```text
+COE Project/
 │
-├── app.py                      # Multi-section Streamlit operations dashboard (6 pages)
-├── requirements.txt            # Project dependencies
-├── README.md                   # System documentation
+├── app.py
+├── requirements.txt
+├── README.md
+├── pytest.ini
+├── .gitignore
 │
-├── data/
-│   ├── transactions.csv        # 300+ synthetic transactions with failure cases
-│   ├── physical_counts.csv     # Physical inventory count audit records
-│   └── offline_queue.db        # Local SQLite queue for store-and-forward persistence
+├── backend/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── database.py
+│   ├── models.py
+│   ├── schemas.py
+│   ├── routes/
+│   │   ├── __init__.py
+│   │   └── investigations.py
+│   └── services/
+│       ├── __init__.py
+│       └── investigation_service.py
+│
+├── frontend/
+│   └── api_client.py
 │
 ├── src/
-│   ├── __init__.py             # Package initializer
-│   ├── data_generator.py       # Reproducible data generator (seed=42)
-│   ├── baseline.py             # Naive variance calculator (benchmark)
-│   ├── reconciliation_engine.py# Rule-based diagnostic reconciliation engine
-│   ├── failure_simulator.py    # Controlled failure scenario simulation routines
-│   ├── fallback_handler.py     # Store-and-forward queue & manual fallback handler
-│   ├── metrics.py              # Quantitative evaluation & benchmarking engine
-│   └── tradeoffs.py            # Multi-criteria operational decision trade-off module
+│   ├── __init__.py
+│   ├── data_generator.py
+│   ├── baseline.py
+│   ├── reconciliation_engine.py
+│   ├── failure_simulator.py
+│   ├── fallback_handler.py
+│   ├── metrics.py
+│   └── tradeoffs.py
 │
 ├── tests/
 │   ├── __init__.py
-│   ├── test_baseline.py        # Pytest suite for baseline calculation
-│   ├── test_reconciliation.py  # Pytest suite for diagnostic rules
-│   ├── test_failure_simulation.py # Pytest suite for failure state simulations
-│   ├── test_fallback.py        # Pytest suite for store-and-forward & manual fallback
-│   ├── test_metrics.py         # Pytest suite for evaluation metrics & formulas
-│   └── test_tradeoffs.py       # Pytest suite for decision trade-off scoring
+│   ├── test_baseline.py
+│   ├── test_reconciliation.py
+│   ├── test_failure_simulation.py
+│   ├── test_fallback.py
+│   ├── test_metrics.py
+│   ├── test_tradeoffs.py
+│   ├── test_api.py
+│   ├── test_database.py
+│   └── test_api_client.py
 │
-└── docs/
-    └── evaluation_report.md    # Detailed experimental evaluation & benchmark report
+├── data/
+│   ├── transactions.csv
+│   ├── physical_counts.csv
+│   ├── offline_queue.db
+│   └── sparesync.db
+│
+├── docs/
+│   ├── architecture.md
+│   ├── api_documentation.md
+│   ├── database_schema.md
+│   ├── testing_strategy.md
+│   └── evaluation_report.md
+│
+└── assets/
 ```
 
----
+## 7. Investigation Management API
 
-## 5. Decision Trade-Off Analysis
+The backend is implemented using FastAPI.
 
-For each recommended recovery action, SpareSync evaluates the multi-criteria trade-offs across four operational dimensions:
-1. **Financial Cost:** Labor, freight, or clerical expenditures required.
-2. **Resolution Time:** Duration to execute the recovery action and verify stock.
-3. **Carbon Emissions:** Environmental footprint associated with logistics/transport.
-4. **Audit Reliability:** Likelihood that the recovery action produces permanent reconciliation.
+**Base URL:**
 
-### Recovery Actions Multi-Criteria Matrix
+```text
+http://127.0.0.1:8000
+```
 
-| Recovery Action Alternative | Cost | Time | Carbon Emissions | Audit Reliability | Description |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| **Manual Physical Recount** | Low | High | Low | High | Deploy warehouse personnel to perform an independent blind recount of shelf bin locations. |
-| **Investigate Transaction History** | Low | Medium | Low | High | Audit ERP logs, delivery dockets, and duplicate barcode scans to isolate clerical discrepancies. |
-| **Wait for Pending Synchronization** | Low | Low | Low | Very High | Allow edge handheld terminal network queue to flush automatically upon gateway reconnection. |
-| **Contact Destination Warehouse** | Low | Medium | Low | High | Initiate inter-hub logistics inquiry to confirm receipt and log missing `TRANSFER_IN` entry. |
-| **Emergency Replacement Shipment** | High | Low | High | High | Dispatch expedited air freight replacement directly from OEM supplier to prevent repair downtime. |
+### Available Endpoints
 
-> ⚠️ **Disclaimer:** *Prototype decision-support estimates for comparison purposes.*
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/` | API welcome information |
+| GET | `/health` | API health check |
+| POST | `/investigations/` | Create an investigation |
+| GET | `/investigations/` | Retrieve all investigations |
+| GET | `/investigations/{investigation_id}` | Retrieve one investigation |
+| PUT | `/investigations/{investigation_id}` | Update an investigation |
+| DELETE | `/investigations/{investigation_id}` | Delete an investigation |
 
----
+### Example Investigation Request
 
-## 6. Baseline vs. SpareSync Comparison
+```json
+{
+  "part_id": "SP-001",
+  "part_name": "Turbine Flow Sensor",
+  "location": "Chennai",
+  "system_stock": 50,
+  "physical_stock": 45,
+  "root_cause": "Missing transfer confirmation",
+  "recommended_action": "Verify destination receipt",
+  "confidence": 0.92,
+  "notes": "Investigation initiated"
+}
+```
 
-| Capability | Baseline Auditor | SpareSync Engine |
-| :--- | :---: | :---: |
-| **Calculate System Stock** | Yes | Yes |
-| **Detect Inventory Variance** | Yes | Yes |
-| **Explain Root Cause** | No | **Yes** |
-| **Analyse Chronological Stream** | No | **Yes** |
-| **Detect Missing Events** | No | **Yes** |
-| **Detect Duplicate Events** | No | **Yes** |
-| **Identify Network Sync Failures** | No | **Yes** |
-| **Identify Out-of-Order Timestamps** | No | **Yes** |
-| **Provide Factual Audit Evidence** | No | **Yes** |
-| **Assign Confidence Ratings** | No | **Yes** |
-| **Expose Decision Trade-Offs (Cost, Time, Emissions, Reliability)** | No | **Yes** |
-| **Simulate Supply Chain Failures** | No | **Yes** |
-| **Support Offline Store-and-Forward** | No | **Yes** |
-| **Manual Fallback Workflows** | No | **Yes** |
+The API calculates the inventory variance during investigation creation.
 
----
+**Variance = System Stock - Physical Stock**
 
-## 7. Measured Evaluation Results
+Interactive API documentation is available at:
 
-*Measured on the 341-transaction synthetic dataset:*
+```text
+http://127.0.0.1:8000/docs
+```
 
-- **Baseline Unexplained Variance Rate:** `100.0%`
-- **SpareSync Unexplained Variance Rate:** `20.0%`
-- **Unexplained Variance Reduction:** `80.0%`
-- **Explanation Accuracy:** `80.0%`
-- **Average Processing Latency:** `< 100 ms`
+For complete endpoint details, request examples, and response structures, see [API Documentation](docs/api_documentation.md).
 
-For the complete technical breakdown, see [docs/evaluation_report.md](file:///Users/larisha/COE%20Project/docs/evaluation_report.md).
+## 8. Database Design
 
----
+SpareSync uses SQLite for persistent investigation management.
 
-## 8. Installation & Quick Start
+The primary database is:
+
+```text
+data/sparesync.db
+```
+
+The `investigations` table stores:
+
+- Investigation ID
+- Part ID and part name
+- Location
+- System stock and physical stock
+- Inventory variance
+- Root cause
+- Recommended action
+- Confidence score
+- Investigation status
+- Notes
+- Creation and update timestamps
+
+A separate database, `data/offline_queue.db`, supports offline transaction storage and synchronization.
+
+For complete database details, see [Database Schema](docs/database_schema.md).
+
+## 9. Testing and Reliability
+
+SpareSync uses pytest for automated testing.
+
+The test suite covers:
+
+- Inventory reconciliation.
+- Baseline calculations and input validation.
+- Trade-off analysis.
+- Metrics.
+- Failure simulation.
+- Offline fallback and synchronization.
+- Database initialization and CRUD operations.
+- FastAPI endpoint behavior.
+- Frontend API client behavior.
+- HTTP and connection error handling.
+
+### Latest Verified Test Result
+
+- **Total tests passed:** 52
+- **Failed tests:** 0
+
+Run the complete test suite using:
+
+```bash
+pytest -v tests/
+```
+
+For testing methodology, coverage areas, and known limitations, see [Testing Strategy](docs/testing_strategy.md).
+
+## 10. Installation and Quick Start
 
 ### Prerequisites
-- Python 3.10+ (Tested on Python 3.11 / 3.13)
-- `pip` package manager
 
-### Step 1: Clone or Navigate to Directory
+- Python 3.10 or later
+- pip package manager
+- Visual Studio Code (recommended)
+
+### Step 1: Navigate to the Project
+
 ```bash
 cd "COE Project"
 ```
 
 ### Step 2: Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 3: Run Test Suite
+### Step 3: Run Automated Tests
+
 ```bash
 pytest -v tests/
 ```
 
-### Step 4: Launch the Streamlit Dashboard
+### Step 4: Start the Streamlit Application
+
 ```bash
 streamlit run app.py
 ```
 
-The application will launch locally at `http://localhost:8501`.
+The Streamlit application will be available at:
 
----
-
-## 9. Dashboard Walkthrough
-
-The Streamlit dashboard is organized into six interactive sections:
-
-1. **📊 Dashboard:**
-   - Top-level operational KPIs (Total Transactions, Monitored Parts, Variance Cases Detected, Issues Explained).
-   - Plotly visualizations: Root cause distribution donut chart and transaction volume by repair hub.
-   - Comprehensive network audit status table.
-
-2. **🔍 Reconciliation:**
-   - Select any spare part (e.g., `SP-001` Turbine Flow Sensor) and hub location (Chennai, Bangalore, Mumbai).
-   - Side-by-side comparison of System Stock vs. Audited Physical Stock with delta highlighting.
-   - Root-cause callout banner, diagnostic confidence score, itemized evidence drawer, and recommended recovery action.
-   - **Operational Trade-Off Analysis:** Real-time multi-criteria scorecard (Cost, Time, Emissions, Reliability), comparative Plotly grouped bar chart, and full decision matrix.
-   - Localized transaction stream table for historical context.
-
-3. **📋 Transaction Explorer:**
-   - Multi-criteria filterable table (by Part ID, Location, Event Type, Sync Status).
-   - Free-text search bar.
-   - One-click CSV export of filtered transaction records.
-
-4. **🧪 Failure Simulation:**
-   - Interactive sandbox demonstrating 4 failure scenarios (Missing Transfer, Duplicate Receipt, Network Failure, Timestamp Inversion).
-   - Clearly isolates **Normal State**, **Failure State**, **System Detection** (with status badges: `Detected`, `Explained`, `Action Required`), and **Recommended Recovery**.
-
-5. **🛡️ Operational Fallback:**
-   - **Section A (Network Outage & Store-and-Forward):** Simulates edge offline queueing and one-click restoration/sync.
-   - **Section B (Manual Fallback Entry):** Structured forms for manual transaction entry during hardware breakdowns with `MANUAL_PENDING_VERIFICATION` status.
-
-6. **⚖️ Baseline Comparison:**
-   - Feature comparison matrix between Baseline and SpareSync.
-   - KPI metrics: Baseline Unexplained Rate, SpareSync Unexplained Rate, Variance Reduction, and Explanation Accuracy.
-   - Plotly comparative bar and resolution distribution charts.
-   - Comprehensive Error Analysis and Limitations section.
-
----
-
-## 10. Operational Resilience and Fallback
-
-SpareSync includes dedicated fallback mechanisms (`src/fallback_handler.py`) to ensure business continuity during technology outages:
-
-```
-[Event Triggered]
-       │
-       ▼
-[Network Check] ──(Offline)──► [Edge SQLite Queue] ──► Status: PENDING_SYNC
-       │                              │
-    (Online)                     (Restored)
-       │                              │
-       ▼                              ▼
-[Central Database] ◄────────── [Queue Synchronizer] ──► Status: SYNCED
+```text
+http://localhost:8501
 ```
 
----
+### Step 5: Start the FastAPI Backend
 
-## 11. Current Progress – Review 1 (~35% Scope)
+Open a separate terminal in the project directory and run:
 
-### ✅ Completed in Review 1:
-- Problem analysis and stakeholder requirement mapping for repair networks.
-- Synthetic dataset generation (300+ realistic multi-location transactions with controlled failure injections).
-- Baseline variance computation engine (`baseline.py`).
-- Rule-based reconciliation engine with 4 core anomaly rules (`reconciliation_engine.py`).
-- Operational decision trade-off analysis framework (`tradeoffs.py`).
-- Interactive failure simulation sandbox with 4 dedicated scenarios (`failure_simulator.py`).
-- Operational fallback module with SQLite store-and-forward and manual fallback (`fallback_handler.py`).
-- Evaluation and benchmarking framework (`metrics.py`).
-- Automated Pytest test suite with 22/22 tests passing.
-- Streamlit interactive operations intelligence UI with 6 dedicated pages (`app.py`).
+```bash
+python3 -m uvicorn backend.main:app --reload
+```
 
----
+The API will be available at:
 
-## 12. Limitations & Future Work
+```text
+http://127.0.0.1:8000
+```
 
-### Limitations:
-- **Rule Rigidity:** Current reconciliation relies on deterministic heuristics; compound failure cases where multiple errors affect the same part concurrently may produce lower confidence.
-- **Batch Processing:** Processes static snapshots from CSV/SQLite rather than live Kafka/MQTT streaming queues.
+Interactive documentation:
 
-### Future Work (Review 2 & Final Implementation):
-- **Machine Learning & Sequence Models:** Introduce Transformer / LSTM sequence models to learn normal transaction patterns and flag probabilistic anomalies without explicit manual rules.
-- **Automated Ledger Self-Healing:** Implement write-back mechanisms to automatically post corrective journal entries upon supervisor authorization.
-- **Real-Time IoT & RFID Integration:** Connect edge RFID readers and store-and-forward queue listeners.
-- **Multi-Criteria Optimization:** Expand trade-off models to optimize dynamic warehouse stocking policies.
+```text
+http://127.0.0.1:8000/docs
+```
+
+The API and Streamlit application run as separate processes.
+
+## 11. Documentation
+
+Additional technical documentation is available in the `docs/` directory.
+
+| Document | Description |
+|---|---|
+| [Architecture](docs/architecture.md) | System components and architecture |
+| [API Documentation](docs/api_documentation.md) | REST API endpoints and request/response details |
+| [Database Schema](docs/database_schema.md) | SQLite database structure |
+| [Testing Strategy](docs/testing_strategy.md) | Testing approach and validation |
+| [Evaluation Report](docs/evaluation_report.md) | Experimental evaluation and benchmarking |
+
+## 12. Limitations and Future Enhancements
+
+### Current Limitations
+
+- The diagnostic engine uses deterministic rule-based logic.
+- Transaction processing is primarily based on stored datasets rather than live streaming.
+- Complete Streamlit-to-FastAPI integration is still pending.
+- Authentication and authorization have not yet been implemented.
+- API load testing and comprehensive test coverage measurement remain future validation tasks.
+
+### Future Enhancements
+
+- Complete integration of the Streamlit frontend with the FastAPI backend.
+- Persistent investigation management through the Investigation Workbench.
+- Authentication and role-based access control.
+- Expanded diagnostic rules and advanced anomaly detection.
+- Live transaction ingestion and IoT integration.
+- API performance and load testing.
+
+## 13. Conclusion
+
+SpareSync combines inventory reconciliation, evidence-based diagnostics, operational decision support, failure simulation, and offline transaction handling into a modular application.
+
+The addition of FastAPI and SQLite-based investigation management establishes a foundation for persistent investigation workflows and future frontend integration.
+
+The project aims to improve inventory discrepancy analysis, investigation traceability, and operational decision-making in multi-location spare parts repair networks.
